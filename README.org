@@ -1,0 +1,179 @@
+#+TITLE: Personal Emacs Configuration
+#+AUTHOR: Lorenzo Cabrini
+#+PROPERTY: header-args :results silent :tangle "~/.config/emacs/init.el"
+#+AUTO_TANGLE: t
+#+FILETAGS: :emacs:config:
+
+* Introduction
+* Bootstrap
+** Init File Header
+There is an Emacs convention to add a special comment header to Lisp libraries (read about it [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][here]]), so I do that here.
+
+#+begin_src emacs-lisp
+  ;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
+
+  ;;; Copyright (C) 2023 Lorenzo Cabrini
+
+  ;;; Author: Lorenzo Cabrini <lorenzo.cabrini@gmail>
+  ;;; Keywords: configuration
+  ;;; URL: https://gitlab.com/lorenzocabrini/emacs.d
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+** Early Init
+Emacs will read the contents of ~early-init.el~ if it is present. This happens before the package system
+and the GUI are initialized, so it it a place to do early initialization stuff.
+
+The following block of code gets tangled into ~~.config/emacs/early-init.el~.
+
+#+begin_src emacs-lisp :tangle "~/.config/emacs/early-init.el"
+  ;;; early-init.el --- Early initialization -*- lexical-binding: t -*-
+
+  ;;; Copyright (C) 2023 Lorenzo Cabrini
+
+  ;;; Author: Lorenzo Cabrini <lorenzo.cabrini@gmail>
+  ;;; Keywords: configuration
+  ;;; URL: https://gitlab.com/lorenzocabrini/emacs.d
+
+  ;;; Commentary:
+
+  ;;; Code:
+
+  ;; Inhibit package.el loading packages prior to init.el loading
+  (setq package-enable-at-startup nil)
+
+  ;; Disable some GUI elements early so that they don't briefly show up when Emacs
+  ;; first fires up
+  (push '(menu-bar-lines . 0) default-frame-alist)
+  (push '(tool-bar-lines . 0) default-frame-alist)
+  (push '(vertical-scroll-bars) default-frame-alist)
+
+  ;; Disable GUI elements
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-splash-screen t)
+  (setq use-file-dialog nil)
+
+  (setq comp-deferred-compilation nil)
+  ;;; early-init.el ends here
+#+end_src
+* Package Management
+** Straight
+I use [[https://github.com/radian-software/straight.el][straight.el]] for package management. The following is taken from the README.
+
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	(bootstrap-version 6))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+	  (url-retrieve-synchronously
+	   "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+	   'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
+Make sure that ~straight.el~ is used as the default package manager.
+
+#+begin_src emacs-lisp
+  (setq straight-use-package-by-default t)
+#+end_src
+
+*** Integration with ~use-package~
+A popular macro for package installation and configuration is [[https://github.com/jwiegley/use-package][use-package]].  The following makes use-package use ~straight.el~ for package management.
+
+#+begin_src emacs-lisp
+  (straight-use-package 'use-package)
+#+end_src
+* General Settings
+** Version Control
+*** Magit
+[[https://magit.vc/][Magit]] is an interface to [[https://git-scm.com/][Git]].
+
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+
+* Org Mode
+I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
+
+#+begin_src emacs-lisp
+  (use-package org
+    :straight (:type built-in)
+    :init (setq org-startup-indented t
+                org-startup-folded t
+                org-hide-emphasis-markers t
+                org-hide-leading-stars t))
+#+end_src
+
+I'm trying out a non-proportional font in ~org-mode~. I also enable word wrap.
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'variable-pitch-mode)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+#+end_src
+
+I customize a few elements. Althought I'm using a non-proportional font in org-mode, I don't want that to apply to code blocks. Also, there are some ~org-mode~ elements I find difficult to read, so I customize them.
+
+#+begin_src emacs-lisp
+  (custom-theme-set-faces
+   'user
+   '(org-block ((t (:inherit fixed-pitch))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:foreground "dark orange"))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+   '(org-date ((t (:inherit (shadow fixed-pitch))))))
+   
+#+end_src
+** Org Modern
+I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives a "modern" style to ~org-mode~.
+
+#+begin_src emacs-lisp
+  (use-package org-modern
+    :custom
+    (org-modern-table nil)
+    (org-modern-timestamp nil)
+    (org-modern-priority nil)
+    :config
+    (global-org-modern-mode))
+#+end_src
+** Auto Tangle
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :hook org-mode)
+#+end_src
+* Text
+** Fonts
+Here I set the fonts I use. I'm probably going to try a few fonts out until I find something that works well for me.
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :font "JetBrainsMono")
+  (set-face-attribute 'fixed-pitch nil :font "JetBrainsMono")
+  (set-face-attribute 'variable-pitch nil :font "DejaVu Sans")
+#+end_src
+* UI
+** Theme
+*** Dracula
+I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]] theme. Where I make any minor changes to the theme, it is because I'm having a hard time seeing some element.
+
+#+begin_src emacs-lisp
+  (use-package dracula-theme
+    :init
+    (setq dracula-enlarge-headings t)
+    :config
+    (load-theme 'dracula t)
+    (set-face-background 'org-block "#1E2029"))
+#+end_src
