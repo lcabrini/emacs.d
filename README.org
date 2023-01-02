@@ -205,14 +205,12 @@ Here I set the fonts I use. I'm probably going to try a few fonts out until I fi
   (set-face-attribute 'variable-pitch nil :font "DejaVu Sans")
 #+end_src
 ** Completion
-*** MCT
-I'm currently using Prot's [[https://github.com/protesilaos/mct][MCT]] package for minibuffer completions. 
-
+*** Vertico
 #+begin_src emacs-lisp
-  (use-package mct
-    :config (mct-minibuffer-mode 1))
+  (use-package vertico
+    :config
+    (vertico-mode))
 #+end_src
-
 *** Marginalia
 The [[https://github.com/minad/marginalia][Marginalia]] package provides marginalia to minibuffer completions.
 
