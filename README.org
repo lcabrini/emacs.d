@@ -263,6 +263,15 @@ this configuration is going to change over time.
     ("M-s l" . consult-line)
     ("M-s L" . consult-line-multi))
 #+end_src
+** Ledger Mode
+[[https://www.ledger-cli.org/][Ledger]] is a powerful personal accounting system for the command-line. Of course, there is a [[https://www.ledger-cli.org/3.0/doc/ledger-mode.html][ledger-mode]] for Emacs as well.
+
+#+begin_src emacs-lisp
+  (use-package ledger-mode
+    :init
+    (setq ledger-clear-whole-transactions 1)
+    :mode "\\.ledger\\'")
+#+end_src
 * UI
 ** All the Icons
 The [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] package is a utility package to install some icon fonts and use them within Emacs.
