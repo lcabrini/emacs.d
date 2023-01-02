@@ -261,6 +261,52 @@ The [[https://github.com/oantolin/orderless][orderless]] package gives an orderl
     ("M-s L" . consult-line-multi))
 #+end_src
 * UI
+** All the Icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons)
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package all-the-icons-dired
+    :after all-the-icons
+    :hook
+    (dired-mode . all-the-icons-dired-mode))
+#+end_src
+** Dashboard
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :demand
+    :config
+    (dashboard-setup-startup-hook))
+
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (setq dashboard-banner-logo-title nil)
+  (setq dashboard-startup-banner 'official)
+  (setq dashboard-center-content nil)
+  (setq dashboard-set-navigator t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  
+  (setq dashboard-items '((recents  . 5)
+                          (projects . 5)
+                          (agenda . 5)))
+
+  (setq dashboard-navigator-buttons
+        `(
+          ((,(all-the-icons-octicon "home" :height 1.1 :v-adjust 0.0)
+            "Index"
+            "Open index.org"
+            (lambda (&rest _) (find-file "~/org/index.org")))
+           (,(all-the-icons-faicon "gitlab" :height 1.1 :v-adjust 0.0)
+            "GitLab"
+            "Open GitLab"
+            (lambda (&rest _) (browse-url "https://gitlab.com")))
+           (,(all-the-icons-octicon "gear" :height 1.1 :v-adjust 0.0)
+            "Config"
+            "Emacs config"
+            (lambda (&rest _) (find-file "~/git/emacs.d/README.org")))
+           )))
+#+end_src
 ** Theme
 *** Dracula
 I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]] theme. Where I make any minor changes to the theme, it is because I'm having a hard time seeing some element.
@@ -272,6 +318,25 @@ I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]]
     :config
     (load-theme 'dracula t)
     (set-face-background 'org-block "#1E2029"))
+#+end_src
+** Modeline
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :ensure t
+    :init
+    (doom-modeline-mode 1)
+    :config
+    (setq doom-modeline-icon t)
+    (setq doom-modeline-buffer-file-name-style 'file-name)
+    (column-number-mode t)
+    :custom
+    (display-battery-mode t))
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq display-time-default-load-average nil)
+  (setq display-time-24hr-format t)
+  (display-time-mode t)
 #+end_src
 * Programming
 ** Eglot
