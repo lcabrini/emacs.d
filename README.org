@@ -84,7 +84,6 @@ Make sure that ~straight.el~ is used as the default package manager.
 #+begin_src emacs-lisp
   (setq straight-use-package-by-default t)
 #+end_src
-
 *** Integration with ~use-package~
 A popular macro for package installation and configuration is [[https://github.com/jwiegley/use-package][use-package]].  The following makes use-package use ~straight.el~ for package management.
 
@@ -271,6 +270,12 @@ this configuration is going to change over time.
     :init
     (setq ledger-clear-whole-transactions 1)
     :mode "\\.ledger\\'")
+#+end_src
+** Systemd Mode
+I frequently edit systemd unit files, so [[https://github.com/holomorph/systemd-mode][systemd-mode]] is handy.
+
+#+begin_src emacs-lisp
+  (use-package systemd)
 #+end_src
 * UI
 ** All the Icons
