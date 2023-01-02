@@ -62,7 +62,7 @@ The following block of code gets tangled into ~~.config/emacs/early-init.el~.
 #+end_src
 * Package Management
 ** Straight
-I use [[https://github.com/radian-software/straight.el][straight.el]] for package management. The following is taken from the README.
+ [[https://github.com/radian-software/straight.el][straight.el]] is a package manager. The following block of code, taken from the ~straight.el~ README, sets it up.
 
 #+begin_src emacs-lisp
   (defvar bootstrap-version)
@@ -99,7 +99,6 @@ A popular macro for package installation and configuration is [[https://github.c
 #+begin_src emacs-lisp
   (use-package magit)
 #+end_src
-
 * Org Mode
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
 
@@ -135,8 +134,26 @@ I customize a few elements. Althought I'm using a non-proportional font in org-m
    '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
-   '(org-date ((t (:inherit (shadow fixed-pitch))))))
-   
+   '(org-date ((t (:inherit (shadow fixed-pitch))))))  
+#+end_src
+** Org Agenda
+The agenda reports on tasks and their states. It needs to know in which files it should look for tasks. I want it to look in a few files in ~~/org/gtd/~. In addition, it should look in any file named ~README.org~ in any directory under ~~/git~.
+
+#+begin_src emacs-lisp
+  (defun lorenzo/readme-in-dir-p (p)
+    (let ((fp (expand-file-name "README.org" p)))
+      (if (file-exists-p fp)
+          fp)))
+
+  (setq org-agenda-files
+        (append
+         '("~/org/gtd/projects.org" "~/org/gtd/habits.org")
+         (flatten-tree
+          (mapcar #'lorenzo/readme-in-dir-p
+                  (directory-files
+                   "~/git"
+                   t
+                   directory-files-no-dot-files-regexp)))))
 #+end_src
 ** Org Modern
 I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives a "modern" style to ~org-mode~.
@@ -150,7 +167,9 @@ I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives 
     :config
     (global-org-modern-mode))
 #+end_src
-** Auto Tangle
+** Org Auto Tangle
+[[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]] is used to automatically tangle org files on save.
+
 #+begin_src emacs-lisp
   (use-package org-auto-tangle
     :hook org-mode)
@@ -177,3 +196,5 @@ I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]]
     (load-theme 'dracula t)
     (set-face-background 'org-block "#1E2029"))
 #+end_src
+
+
