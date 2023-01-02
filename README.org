@@ -253,6 +253,13 @@ The [[https://github.com/oantolin/orderless][orderless]] package gives an orderl
     :init
     (global-corfu-mode))
 #+end_src
+*** Consult
+#+begin_src emacs-lisp
+  (use-package consult
+    :bind
+    ("M-s l" . consult-line)
+    ("M-s L" . consult-line-multi))
+#+end_src
 * UI
 ** Theme
 *** Dracula
