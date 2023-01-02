@@ -222,6 +222,9 @@ The [[https://github.com/oantolin/orderless][orderless]] package gives an orderl
 
 #+begin_src emacs-lisp
   (use-package corfu
+    :custom
+    (corfu-auto t)
+    (corfu-separator ?\s)
     :init
     (global-corfu-mode))
 #+end_src
