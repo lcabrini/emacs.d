@@ -108,6 +108,18 @@ The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] pa
 #+begin_src emacs-lisp
   (use-package magit)
 #+end_src
+** Terminal Emulation
+*** Vterm
+I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal in Emacs.
+
+#+begin_src emacs-lisp
+  (use-package vterm
+    :config
+    (defun lorcab/vterm ()
+      (interactive)
+      (vterm t))
+    :bind ("<s-return>" . lorcab/vterm))
+#+end_src
 * Org Mode
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
 
