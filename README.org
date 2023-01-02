@@ -120,6 +120,17 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
       (vterm t))
     :bind ("<s-return>" . lorcab/vterm))
 #+end_src
+** Project Management
+*** Projectile
+I use [[https://github.com/bbatsov/projectile][Projectile]] for project managment.
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (projectile-mode +1))
+#+end_src
 * Org Mode
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
 
