@@ -242,6 +242,30 @@ I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]]
     (set-face-background 'org-block "#1E2029"))
 #+end_src
 * Programming
+** Eglot
+[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP).
+
+#+begin_src emacs-lisp
+  (use-package eglot
+    :defer t
+    :config
+    (setq read-process-output-max (* 1024 1024)))
+#+end_src
+** Go
+I set up Go to use Eglot. It seems Eglot is not able to organize imports automatically, so I solve this by using ~goimports~. This can be installed with:
+
+#+begin_example
+  $ go install golang.org/x/tools/cmd/goimports@latest
+#+end_example
+
+#+begin_src emacs-lisp
+  (setq gofmt-command "goimports")
+  
+  (use-package go-mode
+    :config
+    (add-hook 'go-mode-hook 'eglot-ensure)
+    (add-hook 'before-save-hook 'gofmt-before-save))
+#+end_src
 ** JSON
 #+begin_src emacs-lisp
   (use-package json-mode)
