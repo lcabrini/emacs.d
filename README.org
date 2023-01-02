@@ -140,7 +140,7 @@ I customize a few elements. Althought I'm using a non-proportional font in org-m
 The agenda reports on tasks and their states. It needs to know in which files it should look for tasks. I want it to look in a few files in ~~/org/gtd/~. In addition, it should look in any file named ~README.org~ in any directory under ~~/git~.
 
 #+begin_src emacs-lisp
-  (defun lorenzo/readme-in-dir-p (p)
+  (defun lorcab/readme-in-dir-p (p)
     (let ((fp (expand-file-name "README.org" p)))
       (if (file-exists-p fp)
           fp)))
@@ -149,7 +149,7 @@ The agenda reports on tasks and their states. It needs to know in which files it
         (append
          '("~/org/gtd/projects.org" "~/org/gtd/habits.org")
          (flatten-tree
-          (mapcar #'lorenzo/readme-in-dir-p
+          (mapcar #'lorcab/readme-in-dir-p
                   (directory-files
                    "~/git"
                    t
@@ -196,5 +196,8 @@ I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]]
     (load-theme 'dracula t)
     (set-face-background 'org-block "#1E2029"))
 #+end_src
-
-
+* Programming
+** JSON
+#+begin_src emacs-lisp
+  (use-package json-mode)
+#+end_src
