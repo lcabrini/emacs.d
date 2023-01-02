@@ -397,3 +397,43 @@ Display the time on the modeline.
 #+begin_src emacs-lisp
   (use-package json-mode)
 #+end_src
+* News & Feeds
+** Elfeed
+I use [[https://github.com/skeeto/elfeed][elfeed]] for subscribing to RSS feeds.
+
+#+begin_src emacs-lisp
+  (use-package elfeed)
+
+  (global-set-key (kbd "C-x w") 'elfeed)
+#+end_src
+
+I use a nifty little utility called [[https://github.com/remyhonig/elfeed-org][elfeed-org]] to manage my feeds in an org-mode file.
+
+#+begin_src emacs-lisp
+  (use-package elfeed-org
+    :ensure t
+    :init
+    (elfeed-org))
+
+  (setq rmh-elfeed-org-files (list "~/org/feeds.org"))
+#+end_src
+* Multimedia
+** EMMS
+I use [[https://www.gnu.org/software/emms/][EMMS]] for playing audio in Emacs. I haven't spent much time configuring it, however.
+
+#+begin_src emacs-lisp
+  (use-package emms
+    :config
+    (progn
+      (emms-standard)
+      (emms-default-players)
+      (setq emms-playlist-buffer-name "EMMS"
+            emms-source-file-default-directory "~/music/")))
+#+end_src
+
+Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]].
+
+#+begin_src emacs-lisp
+  (use-package org-emms)
+#+end_src
+
