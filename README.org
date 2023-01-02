@@ -91,6 +91,15 @@ A popular macro for package installation and configuration is [[https://github.c
   (straight-use-package 'use-package)
 #+end_src
 * General Settings
+** Help
+*** Which Key
+The [[https://github.com/justbur/emacs-which-key][which-key]] utility shows possible completions of commands in the miniguffer.
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :config
+    (which-key-mode))
+#+end_src
 ** Shell Path
 The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] package imports the shell environment into emacs.
 
@@ -434,6 +443,42 @@ Display the time on the modeline.
 
 #+begin_src emacs-lisp
   (use-package json-mode)
+#+end_src
+
+* Communication
+** Mail
+I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
+
+#+begin_src emacs-lisp
+  (use-package mu4e
+    :config
+    (setq mu4e-change-filenames-when-moving t)
+    (setq mu4e-update-interval (* 10 60))
+    (setq mu4e-get-mail-command "mbsync -a")
+    (setq mu4e-maildir "~/mail/gmail")
+
+    (setq mu4e-drafts-folder "/[Gmail]/Drafts")
+    (setq mu4e-sent-folder "/[Gmail]/Sent")
+    (setq mu4e-refile-folder "/[Gmail]/All Mail")
+    (setq mu4e-trash-folder "/[Gmail]/Trash")
+
+    (setq mu4e-maildir-shortcuts
+          '(("/Inbox" . ?i)
+            ("/[Gmail]/Sent Mail" . ?s)
+            ("/[Gmail]/Trash" . ?t)
+            ("/[Gmail]/All Mail" . ?a))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (require 'smtpmail)
+  (setq message-send-mail-function 'smtpmail-send-it
+        starttls-use-gnutls t
+        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-service 587
+        smtpmail-auth-credentials
+        '(("smtp.gmail.com" 587 "lorenzo.cabrini@gmail.com" nil)))
 #+end_src
 * News & Feeds
 ** Elfeed
