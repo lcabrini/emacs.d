@@ -225,7 +225,11 @@ The [[https://github.com/oantolin/orderless][orderless]] package gives an orderl
 #+begin_src emacs-lisp
   (use-package orderless
     :init
-    (setq completion-styles '(orderless)))
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides
+          '((file (styles partial-completion)))))
+
 #+end_src
 *** Corfu
 [[https://github.com/minad/corfu][Corfu]] provides a completion popup for completion at point.
