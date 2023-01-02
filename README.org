@@ -130,6 +130,31 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (projectile-mode +1))
 #+end_src
+** Windows, Buffers and Workspaces
+*** Perspective
+[[https://github.com/nex3/perspective-el][Perspective]] provides named workspaces for Emacs.
+
+#+begin_src emacs-lisp
+  (use-package perspective
+    :bind
+    ("C-x C-b" . persp-list-buffers)         
+    :custom
+    (persp-mode-prefix-key (kbd "C-x x"))
+    :init
+    (persp-mode))
+#+end_src
+*** Ace Window
+[[https://github.com/abo-abo/ace-window][ace-window]] allows me to easily switch between windows in Emacs
+
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :init
+    (progn
+      (global-set-key [remap other-window] 'ace-window)
+      (custom-set-faces
+       '(aw-leading-char-face
+         ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
+#+end_src
 * Org Mode
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
 
