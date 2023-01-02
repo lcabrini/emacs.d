@@ -92,6 +92,15 @@ A popular macro for package installation and configuration is [[https://github.c
   (straight-use-package 'use-package)
 #+end_src
 * General Settings
+** Shell Path
+The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] package imports the shell environment into emacs.
+
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :init
+    (when (daemonp)
+      (exec-path-from-shell-initialize)))
+#+end_src
 ** Version Control
 *** Magit
 [[https://magit.vc/][Magit]] is an interface to [[https://git-scm.com/][Git]].
