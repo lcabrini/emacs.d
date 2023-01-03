@@ -647,6 +647,12 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
     (require 'org-fc-hydra)
     (global-set-key (kbd "C-c f") 'org-fc-hydra/body))
 #+end_src
+** Kanji Mode
+[[https://github.com/wsgac/kanji-mode][kanji-mode]] shows stroke order of kanji and is able to transcribe text to hiragana or romaji.
+
+#+begin_src emacs-lisp
+  (use-package kanji-mode)
+#+end_src
 * Snippet Library
 ** Go
 Make sure the snippet directory for ~go-mode~ exists.
