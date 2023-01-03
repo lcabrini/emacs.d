@@ -472,6 +472,13 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (projectile-mode +1))
 #+end_src
+*** Forge
+[[https://github.com/magit/forge][Forge]] is used to connect to Git forges (GitLab, GitHub, etc).
+
+#+begin_src emacs-lisp
+  (use-package forge
+    :after magit)
+#+end_src
 ** Eglot
 [[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP).
 
