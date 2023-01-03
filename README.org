@@ -446,6 +446,8 @@ The [[https://github.com/iqbalansari/emacs-emojify][emojify]] package is used to
 
 #+begin_src emacs-lisp
   (use-package emojify
+    :init (setq emojify-display-style 'unicode
+                emojify-emoji-styles '(unicode))
     :hook (after-init . global-emojify-mode))
 #+end_src
 * Programming
@@ -622,3 +624,4 @@ Make sure the snippet directory for ~go-mode~ exists.
        $0
   }
 #+end_src
+
