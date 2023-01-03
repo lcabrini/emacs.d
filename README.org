@@ -151,18 +151,6 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
 #+begin_src emacs-lisp
   (use-package burly)
 #+end_src
-*** Perspective
-[[https://github.com/nex3/perspective-el][Perspective]] provides named workspaces for Emacs.
-
-#+begin_src emacs-lisp
-  ;; (use-package perspective
-  ;;  :bind
-  ;;  ("C-x C-b" . persp-list-buffers)         
-  ;;  :custom
-  ;;  (persp-mode-prefix-key (kbd "C-x x"))
-  ;;  :init
-  ;;  (persp-mode))
-#+end_src
 *** Ace Window
 [[https://github.com/abo-abo/ace-window][ace-window]] allows me to easily switch between windows in Emacs
 
