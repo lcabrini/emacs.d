@@ -520,6 +520,23 @@ I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
   (setq mastodon-instance-url "https://emacs.ch"
         mastodon-active-user "lorenzocabrini")
 #+end_src
+** IRC
+Emacs comes with a built-in IRC client called ERC.
+
+#+begin_src emacs-lisp
+  (require 'erc)
+  (setq erc-autojoin-channels-alist '(("libera.chat"
+                                      "#emacs" "#org-mode"
+                                      "#archlinux" "#gentoo" "#bash"
+                                      "#guile"
+                                      )))
+  (setq erc-default-server "irc.libera.chat")
+  (setq erc-nick "lorcab")
+  (setq erc-prompt-for-nickserv-password nil)
+  (setq erc-autojoin-timing 'ident)
+  (require 'erc-services)
+  (erc-services-mode 1)
+#+end_src
 * News & Feeds
 ** Elfeed
 I use [[https://github.com/skeeto/elfeed][elfeed]] for subscribing to RSS feeds.
