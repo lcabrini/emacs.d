@@ -469,6 +469,13 @@ The [[https://github.com/iqbalansari/emacs-emojify][emojify]] package is used to
     :config
     (setq read-process-output-max (* 1024 1024)))
 #+end_src
+** Scheme
+[[https://github.com/emacsmirror/geiser][Geiser]] allows Emacs to connect to various Scheme REPLs. I use Guile Scheme.
+
+#+begin_src emacs-lisp
+  (use-package geiser-guile
+    :ensure t)
+#+end_src
 ** Go
 [[https://github.com/dominikh/go-mode.el][go-mode]] provides a major mode for Go. I use it with  Eglot. It seems Eglot is not able to organize imports automatically, so I solve this by using ~goimports~. This can be installed with:
 
