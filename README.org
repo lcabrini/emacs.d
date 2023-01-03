@@ -417,16 +417,19 @@ Currently, I use [[https://github.com/emacs-dashboard/emacs-dashboard][emacs-das
            )))
 #+end_src
 ** Theme
-*** Dracula
-I feel really comfortable with the [[https://github.com/dracula/emacs][dracula]] theme. Where I make any minor changes to the theme, it is because I'm having a hard time seeing some element.
+*** Doom Themes
+The [[https://github.com/doomemacs/themes][Doom]] theme pack has a large collection of themes.
 
 #+begin_src emacs-lisp
-  (use-package dracula-theme
-    :init
-    (setq dracula-enlarge-headings t)
+  (use-package doom-themes
+    :ensure t
     :config
-    (load-theme 'dracula t)
-    (set-face-background 'org-block "#1E2029"))
+    (setq doom-themes-enable-bold t    
+          doom-themes-enable-italic t)
+    (load-theme 'doom-one t)
+  
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config))
 #+end_src
 ** Modeline
 I use [[https://github.com/seagle0128/doom-modeline][doom-modeline]] as my modeline.
