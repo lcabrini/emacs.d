@@ -512,6 +512,14 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
 
 * Communication
 ** Mail
+*** Email Address
+Set these, since mu4e uses them.
+
+#+begin_src emacs-lisp
+  (setq user-full-name "Lorenzo Cabrini"
+        user-mail-address "lorenzo.cabrini@gmail.com")
+#+end_src
+*** IMAP
 I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
 
 #+begin_src emacs-lisp
@@ -534,6 +542,7 @@ I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
             ("/[Gmail]/All Mail" . ?a))))
 #+end_src
 
+*** SMTP
 #+begin_src emacs-lisp
   (require 'smtpmail)
   (setq message-send-mail-function 'smtpmail-send-it
@@ -545,6 +554,7 @@ I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
         smtpmail-auth-credentials
         '(("smtp.gmail.com" 587 "lorenzo.cabrini@gmail.com" nil)))
 #+end_src
+
 ** Mastodon
 #+begin_src emacs-lisp
   (use-package mastodon
