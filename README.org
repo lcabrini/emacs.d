@@ -503,7 +503,12 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
 #+begin_src emacs-lisp
   (use-package json-mode)
 #+end_src
+**  REST Client
+[[https://github.com/pashky/restclient.el][restclient.el]] is a REST client for Emacs.
 
+#+begin_src emacs-lisp
+  (use-package restclient)
+#+end_src
 * Communication
 ** Mail
 *** Email Address
