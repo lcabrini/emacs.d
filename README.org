@@ -145,6 +145,12 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
     ("C-x x s" . bufler-workspace-frame-set)
     :config (bufler-mode))
 #+end_src
+*** Burly
+[[https://github.com/alphapapa/burly.el][Burly]] allows you to save and restore frame and window configurations.
+
+#+begin_src emacs-lisp
+  (use-package burly)
+#+end_src
 *** Perspective
 [[https://github.com/nex3/perspective-el][Perspective]] provides named workspaces for Emacs.
 
