@@ -135,17 +135,27 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
     :bind ("<s-return>" . lorcab/vterm))
 #+end_src
 ** Windows, Buffers and Workspaces
+*** Bufler
+ [[https://github.com/alphapapa/bufler.el][Bufler]] allows you to group buffers into workspaces. 
+
+#+begin_src emacs-lisp
+  (use-package bufler
+    :bind
+    ("C-x x b" . bufler-switch-buffer)
+    ("C-x x s" . bufler-workspace-frame-set)
+    :config (bufler-mode))
+#+end_src
 *** Perspective
 [[https://github.com/nex3/perspective-el][Perspective]] provides named workspaces for Emacs.
 
 #+begin_src emacs-lisp
-  (use-package perspective
-    :bind
-    ("C-x C-b" . persp-list-buffers)         
-    :custom
-    (persp-mode-prefix-key (kbd "C-x x"))
-    :init
-    (persp-mode))
+  ;; (use-package perspective
+  ;;  :bind
+  ;;  ("C-x C-b" . persp-list-buffers)         
+  ;;  :custom
+  ;;  (persp-mode-prefix-key (kbd "C-x x"))
+  ;;  :init
+  ;;  (persp-mode))
 #+end_src
 *** Ace Window
 [[https://github.com/abo-abo/ace-window][ace-window]] allows me to easily switch between windows in Emacs
