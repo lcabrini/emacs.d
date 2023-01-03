@@ -100,6 +100,12 @@ The [[https://github.com/justbur/emacs-which-key][which-key]] utility shows poss
     :config
     (which-key-mode))
 #+end_src
+*** Discover
+[[https://github.com/mickeynp/discover.el][Discover]] provides help via context menus.
+
+#+begin_src emacs-lisp
+  (use-package discover)
+#+end_src
 ** Shell Path
 The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] package imports the shell environment into emacs.
 
@@ -515,7 +521,9 @@ I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
 #+end_src
 ** Mastodon
 #+begin_src emacs-lisp
-  (use-package mastodon)
+  (use-package mastodon
+    :config
+    (mastodon-discover))
 
   (setq mastodon-instance-url "https://emacs.ch"
         mastodon-active-user "lorenzocabrini")
