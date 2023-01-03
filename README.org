@@ -163,6 +163,12 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
        '(aw-leading-char-face
          ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 #+end_src
+** Authentication
+I want all my passwords encrypted.
+
+#+begin_src emacs-lisp
+  (setq auth-sources '("~/.authinfo.gpg"))
+#+end_src
 * Org Mode
 ** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
