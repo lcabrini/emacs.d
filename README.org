@@ -165,6 +165,7 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
          ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 #+end_src
 * Org Mode
+** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
 
 #+begin_src emacs-lisp
