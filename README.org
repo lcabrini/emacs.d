@@ -452,6 +452,13 @@ Display the time on the modeline.
   (setq display-time-24hr-format t)
   (display-time-mode t)
 #+end_src
+** Emoji
+The [[https://github.com/iqbalansari/emacs-emojify][emojify]] package is used to display emojis.
+
+#+begin_src emacs-lisp
+  (use-package emojify
+    :hook (after-init . global-emojify-mode))
+#+end_src
 * Programming
 ** Eglot
 [[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP).
@@ -584,6 +591,12 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
 #+begin_src emacs-lisp
   (use-package org-emms)
 #+end_src
+** MPV
+[[https://github.com/kljohann/mpv.el][mpv.el]] is used to control mpv from within Emacs.
+
+#+begin_src emacs-lisp
+  (use-package mpv)
+#+end_src
 * Snippet Library
 ** Go
 Make sure the snippet directory for ~go-mode~ exists.
@@ -602,4 +615,3 @@ Make sure the snippet directory for ~go-mode~ exists.
        $0
   }
 #+end_src
-
