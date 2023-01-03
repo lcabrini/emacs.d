@@ -513,6 +513,13 @@ I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
         smtpmail-auth-credentials
         '(("smtp.gmail.com" 587 "lorenzo.cabrini@gmail.com" nil)))
 #+end_src
+** Mastodon
+#+begin_src emacs-lisp
+  (use-package mastodon)
+
+  (setq mastodon-instance-url "https://emacs.ch"
+        mastodon-active-user "lorenzocabrini")
+#+end_src
 * News & Feeds
 ** Elfeed
 I use [[https://github.com/skeeto/elfeed][elfeed]] for subscribing to RSS feeds.
