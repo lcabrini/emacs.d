@@ -661,12 +661,19 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
                :type git :repo "https://git.sr.ht/~l3kn/org-fc"
                :files (:defaults "awk" "demo.org"))
     :custom (org-fc-directories '("~/fc/lang/gaa"
-                                  "~/fc/lang/jpn")
+                                  "~/fc/lang/jpn"))
     :config
     (require 'org-fc-audio)
     (require 'org-fc-keymap-hint)
     (require 'org-fc-hydra)
     (global-set-key (kbd "C-c f") 'org-fc-hydra/body))
+#+end_src
+
+Increase the text scale before review and reset it back after the review.
+
+#+begin_src emacs-lisp
+  (add-hook 'org-fc-before-setup-hook (lambda () (text-scale-set 3)))
+  (add-hook 'org-fc-after-review-hook (lambda () (text-scale-set 0)))
 #+end_src
 ** Kanji Mode
 [[https://github.com/wsgac/kanji-mode][kanji-mode]] shows stroke order of kanji and is able to transcribe text to hiragana or romaji.
