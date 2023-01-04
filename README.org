@@ -700,3 +700,23 @@ Make sure the snippet directory for ~go-mode~ exists.
   }
 #+end_src
 
+#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/forr"
+  # -*- snippet -*-
+  # name: forr
+  # key: _forr
+  # --
+  for _, $1 := range $2 {
+      $0
+  }
+#+end_src
+
+#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/ife"
+  # -*- snippet -*-
+  # name: if (err)
+  # key: _ife
+  # --
+  if err != nil {
+     fmt.Printf("Error: %s\n", err.Error())
+     $0
+  }
+#+end_src
