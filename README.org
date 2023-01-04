@@ -675,8 +675,11 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
     :straight (org-fc
                :type git :repo "https://git.sr.ht/~l3kn/org-fc"
                :files (:defaults "awk" "demo.org"))
-    :custom (org-fc-directories '("~/fc/lang/gaa"
-                                  "~/fc/lang/jpn"))
+    :custom
+    (org-fc-directories '("~/fc/lang/gaa"
+                          "~/fc/lang/jpn"))
+    (org-fc-review-history-file "~/fc/org-fc-reviews.tsv")
+			       
     :config
     (require 'org-fc-audio)
     (require 'org-fc-keymap-hint)
@@ -699,9 +702,9 @@ I have a simple directory structure for my flashcards. For any language /LANG/, 
              "/")))
       (call-interactively 'org-fc-audio-set-after-setup)))
 
-  (with-eval-after-load "org" (lambda ()
-                                (interactive)
-                                (lorcab/fc-audio-after-setup)))
+  (define-key org-mode-map (kbd "C-c a") (lambda ()
+                                           (interactive)
+                                           (lorcab/fc-audio-after-setup)))
 #+end_src
 
 Increase the text scale before review and reset it back after the review.
