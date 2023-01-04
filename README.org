@@ -660,7 +660,8 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
     :straight (org-fc
                :type git :repo "https://git.sr.ht/~l3kn/org-fc"
                :files (:defaults "awk" "demo.org"))
-    :custom (org-fc-directories '("~/fc/lang/ga"))
+    :custom (org-fc-directories '("~/fc/lang/gaa"
+                                  "~/fc/lang/jpn")
     :config
     (require 'org-fc-audio)
     (require 'org-fc-keymap-hint)
