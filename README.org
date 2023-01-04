@@ -731,6 +731,9 @@ I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs fr
     (dtk-word-wrap t))
 #+end_src
 * Snippet Library
+I'm currently maintaining my Yasnippet snippets in this file. Each snippet gets tangled into its own file. It feels really conventient to have the snippets here for now. I've been very bad at maintaing my own snippets in the past, by having them in the same file as my Emacs configuration is handy for me, at least for now.
+
+When things begin to feel too heavy or saving the file becomes to slow, I'll move the snippets into their own files.
 ** Go
 Make sure the snippet directory for ~go-mode~ exists.
 
