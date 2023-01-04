@@ -522,6 +522,13 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
 #+begin_src emacs-lisp
   (use-package restclient)
 #+end_src
+
+Associate the ~.rest~ extension with restclient-mode.
+
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist
+               '("\\.rest\\'" . restclient-mode))
+#+end_src
 * Communication
 ** Mail
 *** Email Address
