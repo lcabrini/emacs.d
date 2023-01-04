@@ -286,6 +286,15 @@ Here I set the fonts I use. I'm probably going to try a few fonts out until I fi
   (set-face-attribute 'fixed-pitch nil :font "JetBrainsMono")
   (set-face-attribute 'variable-pitch nil :font "DejaVu Sans")
 #+end_src
+
+I also set up some CJK fonts. I'm currently only using Japanese but plan to learn Hangul at some point.
+
+#+begin_src emacs-lisp
+  (set-fontset-font t 'han "Noto Sans CJK SC Regular")
+  (set-fontset-font t 'kana "Noto Sans CJK JP Regular")
+  (set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
+  (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
+#+end_src
 ** Completion
 *** Vertico
 #+begin_src emacs-lisp
@@ -673,6 +682,26 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
     (require 'org-fc-keymap-hint)
     (require 'org-fc-hydra)
     (global-set-key (kbd "C-c f") 'org-fc-hydra/body))
+#+end_src
+
+I have a simple directory structure for my flashcards. For any language /LANG/, the flashcard files are stored in ~~/fc/lang/<LANG>~ and the corresponding audio files are in ~~fc/res/au/<LANG>~. I don't want to have to navigate through directories each time I call ~org-fc-audio-set-after-setup~. The following function takes care of that.
+
+#+begin_src emacs-lisp
+  (defun lorcab/fc-audio-after-setup ()
+    (interactive)
+    (let ((default-directory
+            (concat 
+             (expand-file-name
+              (file-name-nondirectory
+               (directory-file-name
+                (file-name-directory default-directory)))
+              "~/fc/res/au/")
+             "/")))
+      (call-interactively 'org-fc-audio-set-after-setup)))
+
+  (with-eval-after-load "org" (lambda ()
+                                (interactive)
+                                (lorcab/fc-audio-after-setup)))
 #+end_src
 
 Increase the text scale before review and reset it back after the review.
