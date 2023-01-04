@@ -496,7 +496,13 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
     :ensure t)
 #+end_src
 ** Go
-[[https://github.com/dominikh/go-mode.el][go-mode]] provides a major mode for Go. I use it with  Eglot. It seems Eglot is not able to organize imports automatically, so I solve this by using ~goimports~. This can be installed with:
+[[https://github.com/dominikh/go-mode.el][go-mode]] provides a major mode for Go. I use it with Eglot. This requires installing ~gopls~, which is done with:
+
+#+begin_example
+  $ go install golang.org/x/tools/gopls@latest
+#+end_example
+
+I couldn't get Eglot to automatically organize imports, so for now I'm letting ~goimports~ handle that. It is installed with:
 
 #+begin_example
   $ go install golang.org/x/tools/cmd/goimports@latest
