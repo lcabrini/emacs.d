@@ -691,7 +691,12 @@ Increase the text scale before review and reset it back after the review.
 I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs front-end to ~diatheke~, which needs to be installed. Also, one or more texts need to be installed.
 
 #+begin_src emacs-lisp
-  (use-package dtk)
+  (use-package dtk
+    :bind (("C-c B" . dtk-bible))
+    :custom
+    (dtk-module "CPDV")
+    (dtk-module-category "Biblical Texts")
+    (dtk-word-wrap t))
 #+end_src
 * Snippet Library
 ** Go
