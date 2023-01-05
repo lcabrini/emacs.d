@@ -528,6 +528,16 @@ I couldn't get Eglot to automatically organize imports, so for now I'm letting ~
     (add-hook 'go-mode-hook 'eglot-ensure)
     (add-hook 'before-save-hook 'gofmt-before-save))
 #+end_src
+** JavaScript
+I'm using the built-in js-mode, together with Eglot. Eglot requires the TypeScript language server to be installed with:
+
+#+begin_example
+  $ sudo npm install -g typescript-language-server typescript
+#+end_example
+
+#+begin_src emacs-lisp
+  (add-hook 'js-mode-hook 'eglot-ensure)
+#+end_src
 ** JSON
 [[https://github.com/joshwnj/json-mode][json-mode]] provides a major mode for working with JSON files. I use it with Eglot, without really knowing what the benefits are. I guess I'll figure it out eventually.
 
@@ -542,6 +552,23 @@ Eglot requires a language server called ~vscode-langservers-extracted~. It also 
   (use-package json-mode
     :config
     (add-hook 'json-mode-hook 'eglot-ensure))
+#+end_src
+
+JSON files can be quite big and the format might be compacted. This gives Emacs a bit of trouble, so the following function runs the JSON file through the ~jq~ utility before opening it. The best available binding I could find was ~<C-x C-g>~ because of its proximity to the normal ~find-file~ binding. I might change it
+later. This is not yet very safe.
+
+#+begin_src emacs-lisp
+  (defun lorcab/pre-open-json-file (file)
+    (interactive "fFind JSON file: ")
+    (let ((tmp (make-temp-file "jq")))
+      (shell-command-to-string (concat "cat " file " | jq > " tmp))
+      (rename-file tmp file t)
+      (find-file file)))
+
+  (global-set-key
+   (kbd "C-x C-g") (lambda ()
+                     (interactive)
+                     (call-interactively 'lorcab/pre-open-json-file)))
 #+end_src
 **  REST Client
 [[https://github.com/pashky/restclient.el][restclient.el]] is a REST client for Emacs.
@@ -789,6 +816,8 @@ Make sure the snippet directory for ~go-mode~ exists.
 * To Do
 ** org-fc [0/1]
 - [ ] make sure all org-fc buffers get their text scale reset when a review is over, not just the active one
-** json-mode [0/1]
-- [ ] pipe JSON files through ~jq~ before loading them into the buffer to prevent issues with very long lines
+** json-mode [1/3]
+- [X] pipe JSON files through ~jq~ before loading them into the buffer to prevent issues with very long lines
+- [ ] ~lorcab/pre-open-json-file~: make a backup copy of the original before piping through ~jq~
+- [ ] ~lorcab/pre-open-json-file~: make sure file is JSON before piping through ~jq~
 * References
