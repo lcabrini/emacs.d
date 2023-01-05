@@ -282,6 +282,15 @@ I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives 
     :hook org-mode)
 #+end_src
 * Text
+** Coding System
+Use UTF-8. I'm not sure all these are needed, but I'll play it safe for now and remove the ones that are not needed.
+#+begin_src emacs-lisp
+  (prefer-coding-system       'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8)
+#+end_src
 ** Fonts
 Here I set the fonts I use. I'm probably going to try a few fonts out until I find something that works well for me.
 
