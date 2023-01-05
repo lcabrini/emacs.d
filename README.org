@@ -529,10 +529,19 @@ I couldn't get Eglot to automatically organize imports, so for now I'm letting ~
     (add-hook 'before-save-hook 'gofmt-before-save))
 #+end_src
 ** JSON
-[[https://github.com/joshwnj/json-mode][json-mode]] provides a major mode for working with JSON files.
+[[https://github.com/joshwnj/json-mode][json-mode]] provides a major mode for working with JSON files. I use it with Eglot, without really knowing what the benefits are. I guess I'll figure it out eventually.
+
+Eglot requires a language server called ~vscode-langservers-extracted~. It also needs the typescript language server. The following two commands install both of those.
+
+#+begin_example
+  $ sudo npm i -g vscode-langservers-extracted
+  $ sudo npm install -g typescript-language-server typescript
+#+end_example
 
 #+begin_src emacs-lisp
-  (use-package json-mode)
+  (use-package json-mode
+    :config
+    (add-hook 'json-mode-hook 'eglot-ensure))
 #+end_src
 **  REST Client
 [[https://github.com/pashky/restclient.el][restclient.el]] is a REST client for Emacs.
@@ -777,7 +786,6 @@ Make sure the snippet directory for ~go-mode~ exists.
      $0
   }
 #+end_src
-
 * To Do
 ** org-fc [0/1]
 - [ ] make sure all org-fc buffers get their text scale reset when a review is over, not just the active one
