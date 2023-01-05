@@ -230,6 +230,12 @@ The agenda reports on tasks and their states. It needs to know in which files it
                    t
                    directory-files-no-dot-files-regexp)))))
 #+end_src
+** Org Tags
+Since i'm using a non-proportional fonts in org-mode, tags don't align well and it looks ugly. 
+
+#+begin_src emacs-lisp
+  (setq org-tags-column 0)
+#+end_src
 ** Org Roam
 [[https://www.orgroam.com/][Org-roam]] is an extension to ~org-mode~ that implments a personal knowledge management system.
 
