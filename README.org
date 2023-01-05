@@ -5,6 +5,9 @@
 #+FILETAGS: :emacs:config:
 
 * Introduction
+This is my personal Emacs configuration. For convenience, I've also got my collection of snippets near the end of the file. Since this is just an org file, all the code blocks get tangled out into various different files.
+
+On Jan. 1, 2023 I decided to delete my Emacs configuration file and to start all over. The old configuration had become a mess. I wanted to start afresh.
 * Bootstrap
 ** Init File Header
 There is an Emacs convention to add a special comment header to Lisp libraries (read about it [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][here]]), so I do that here.
@@ -709,6 +712,8 @@ I have a simple directory structure for my flashcards. For any language /LANG/, 
 
 Increase the text scale before review and reset it back after the review.
 
+*Note:* resetting the text scale doesn't work very well when a review is done on more than a single org file. In such cases, only the active buffer at the end of the review gets its text scale reset. I'll have to find a way to solve that.
+
 #+begin_src emacs-lisp
   (add-hook 'org-fc-before-setup-hook (lambda () (text-scale-set 3)))
   (add-hook 'org-fc-after-review-hook (lambda () (text-scale-set 0)))
@@ -731,7 +736,7 @@ I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs fr
     (dtk-word-wrap t))
 #+end_src
 * Snippet Library
-I'm currently maintaining my Yasnippet snippets in this file. Each snippet gets tangled into its own file. It feels really conventient to have the snippets here for now. I've been very bad at maintaing my own snippets in the past, by having them in the same file as my Emacs configuration is handy for me, at least for now.
+I'm currently maintaining my snippets in this file. Each snippet gets tangled into its own file. It feels really conventient to have the snippets here for now. I've been very bad at maintaing my own snippets in the past, by having them in the same file as my Emacs configuration is handy for me, at least for now.
 
 When things begin to feel too heavy or saving the file becomes to slow, I'll move the snippets into their own files.
 ** Go
@@ -772,3 +777,10 @@ Make sure the snippet directory for ~go-mode~ exists.
      $0
   }
 #+end_src
+
+* To Do
+** org-fc [0/1]
+- [ ] make sure all org-fc buffers get their text scale reset when a review is over, not just the active one
+** json-mode [0/1]
+- [ ] pipe JSON files through ~jq~ before loading them into the buffer to prevent issues with very long lines
+* References
