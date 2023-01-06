@@ -697,8 +697,7 @@ Emacs comes with a built-in IRC client called ERC.
   (use-package ement)
 #+end_src
 ** Telegram
-
-[[https://github.com/zevlg/telega.el][telega.el]] is a Telegram client for Emacs.
+[[https://github.com/zevlg/telega.el][telega.el]] is a Telegram client for Emacs. It requires [[https://github.com/tdlib/td][TDLib]] to be installed and it can be really picky with the version. I had to try a few combinations before I got it to work.
 
 #+begin_src emacs-lisp
   (use-package telega
