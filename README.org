@@ -594,22 +594,20 @@ Eglot requires a language server called ~vscode-langservers-extracted~. It also 
     (add-hook 'json-mode-hook 'eglot-ensure))
 #+end_src
 
-JSON files can be quite big and the format might be compacted. This gives Emacs a bit of trouble, so the following function runs the JSON file through the ~jq~ utility before opening it. The best available binding I could find was ~<C-x C-g>~ because of its proximity to the normal ~find-file~ binding. I might change it
-later. This is not yet very safe.
+I frequently have to deal with fairly large, compacted JSON files. This tends to slow Emacs down. The following runs the file through ~jq~ before insert into the buffer.
 
 #+begin_src emacs-lisp
-  (defun lorcab/pre-open-json-file (file)
-    (interactive "fFind JSON file: ")
-    (let ((tmp (make-temp-file "jq")))
-      (shell-command-to-string (concat "cat " file " | jq > " tmp))
-      (rename-file tmp file t)
-      (find-file file)))
+  (defun lorcab/pretty-print-json-file ()
+    (when buffer-file-name
+      (message "we have a file name")
+      (when (string-match "\\.json\\'" buffer-file-name)
+            (message "we have a JSON file")
+            (shell-command-on-region (point-min) (point-max) "jq" t t))))
 
-  (global-set-key
-   (kbd "C-x C-g") (lambda ()
-                     (interactive)
-                     (call-interactively 'lorcab/pre-open-json-file)))
+  (add-hook 'find-file-hook 'lorcab/pretty-print-json-file)
 #+end_src
+
+*** TODO check if the JSON file has long lines before piping through jq
 **  REST Client
 [[https://github.com/pashky/restclient.el][restclient.el]] is a REST client for Emacs.
 
@@ -833,6 +831,7 @@ Increase the text scale before review and reset it back after the review.
   (add-hook 'org-fc-before-setup-hook (lambda () (text-scale-set 3)))
   (add-hook 'org-fc-after-review-hook (lambda () (text-scale-set 0)))
 #+end_src
+*** TODO reset text scale on all org-fc buffers after review
 ** Kanji Mode
 [[https://github.com/wsgac/kanji-mode][kanji-mode]] shows stroke order of kanji and is able to transcribe text to hiragana or romaji.
 
@@ -851,6 +850,11 @@ I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs fr
     (dtk-word-wrap t))
 #+end_src
 * Fun Stuff
+** Sudoku
+ With [[https://github.com/zevlg/sudoku.el][sudoku.el]] you can play sudoku in Emacs.
+#+begin_src emacs-lisp
+  (use-package sudoku)
+#+end_src
 * Snippet Library
 I'm currently maintaining my snippets in this file. Each snippet gets tangled into its own file. It feels really conventient to have the snippets here for now. I've been very bad at maintaing my own snippets in the past, by having them in the same file as my Emacs configuration is handy for me, at least for now.
 
@@ -893,11 +897,4 @@ Make sure the snippet directory for ~go-mode~ exists.
      $0
   }
 #+end_src
-* To Do
-** org-fc [0/1]
-- [ ] make sure all org-fc buffers get their text scale reset when a review is over, not just the active one
-** json-mode [1/3]
-- [X] pipe JSON files through ~jq~ before loading them into the buffer to prevent issues with very long lines
-- [ ] ~lorcab/pre-open-json-file~: make a backup copy of the original before piping through ~jq~
-- [ ] ~lorcab/pre-open-json-file~: make sure file is JSON before piping through ~jq~
 * References
