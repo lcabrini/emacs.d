@@ -473,6 +473,10 @@ Currently, I use [[https://github.com/emacs-dashboard/emacs-dashboard][emacs-das
 *** Modus Themes
 #+begin_src emacs-lisp
   (use-package modus-themes
+    :init
+    (setq modus-themes-bold-constructs t
+          modus-themes-italic-constructs t
+          modus-themes-mixed-fonts t)
     :config
     (load-theme 'modus-vivendi-tinted :no-confirm))
 #+end_src
