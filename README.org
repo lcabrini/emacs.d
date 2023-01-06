@@ -387,10 +387,11 @@ I frequently edit systemd unit files, so [[https://github.com/holomorph/systemd-
  #+end_src
 * UI
 ** General
-Some general settings that I like to have.
+Highlight the current line in programming and text modes.
 
 #+begin_src emacs-lisp
-  (global-hl-line-mode t)
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  (add-hook 'text-mode-hook #'hl-line-mode)
 #+end_src
 ** All the Icons
 The [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] package is a utility package to install some icon fonts and use them within Emacs.
