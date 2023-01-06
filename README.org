@@ -391,6 +391,18 @@ I frequently edit systemd unit files, so [[https://github.com/holomorph/systemd-
      :config
      (yas-global-mode 1))
  #+end_src
+** Visual Fill Column
+[[https://codeberg.org/joostkremers/visual-fill-column][visual-fill-column]] mimics the effect of ~fill-column~ in visual-line-mode.
+
+#+begin_src emacs-lisp
+  (use-package visual-fill-column)
+#+end_src
+** Rainbow identifiers
+[[https://github.com/Fanael/rainbow-identifiers][Rainbow Identifiers]] mode is a minor mode providing highlighting of identifiers based on their name.
+
+#+begin_src emacs-lisp
+  (use-package rainbow-identifiers)
+#+end_src
 * UI
 ** General
 Highlight the current line in programming and text modes.
@@ -683,6 +695,21 @@ Emacs comes with a built-in IRC client called ERC.
 
 #+begin_src emacs-lisp
   (use-package ement)
+#+end_src
+** Telegram
+
+[[https://github.com/zevlg/telega.el][telega.el]] is a Telegram client for Emacs.
+
+#+begin_src emacs-lisp
+  (use-package telega
+    :defer t
+    :straight (telega
+               :type git
+               :host github
+               :repo "zevlg/telega.el"
+               :branch "release-0.8.0")
+    :commands (telega)
+    :init (setq telega-server-libs-prefix "/usr"))
 #+end_src
 * News & Feeds
 ** Elfeed
