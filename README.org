@@ -734,6 +734,31 @@ I use a nifty little utility called [[https://github.com/remyhonig/elfeed-org][e
 
   (setq rmh-elfeed-org-files (list "~/org/feeds.org"))
 #+end_src
+** Elfeed Tube
+[[https://github.com/karthink/elfeed-tube][Elfeed Tube]] is an extension to elfeed which adds improved YouTube integration.
+
+#+begin_src emacs-lisp
+  (use-package elfeed-tube
+    :after elfeed
+    :demand t
+    :config
+    (elfeed-tube-setup)
+    :bind (:map elfeed-show-mode-map
+                ("F" . elfeed-tube-fetch)
+                ([remap save-buffer] . elfeed-tube-save)
+                :map elfeed-search-mode-map
+                ("F" . elfeed-tube-fetch)
+                ([remap save-buffer] . elfeed-tube-save)))
+#+end_src
+
+elfeed-tube-mpv gives better MPV support
+
+#+begin_src emacs-lisp
+  (use-package elfeed-tube-mpv
+    :bind (:map elfeed-show-mode-map
+                ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+                ("C-c C-w" . elfeed-tube-mpv-where)))
+#+end_src
 * Multimedia
 ** EMMS
 I use [[https://www.gnu.org/software/emms/][EMMS]] for playing audio in Emacs. I haven't spent much time configuring it, however.
