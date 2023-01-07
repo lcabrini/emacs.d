@@ -326,12 +326,12 @@ Use UTF-8. I'm not sure all these are needed, but I'll play it safe for now and 
 #+end_src
 
 ** Fonts
-Here I set the fonts I use. I'm probably going to try a few fonts out until I find something that works well for me.
+I really like the [[https://git.sr.ht/~protesilaos/iosevka-comfy][Iosekva Comfy]] font.
 
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :font "JetBrainsMono")
-  (set-face-attribute 'fixed-pitch nil :font "JetBrainsMono")
-  (set-face-attribute 'variable-pitch nil :font "DejaVu Sans")
+  (set-face-attribute 'default nil :family "Iosevka Comfy" :height 105)
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka Comfy" :height 105)
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Comfy Wide Duo" :height 105)
 #+end_src
 
 I also set up some CJK fonts. I'm currently only using Japanese but plan to learn Hangul at some point.
