@@ -26,6 +26,7 @@ There is an Emacs convention to add a special comment header to Lisp libraries (
 
   ;;; Code:
 #+end_src
+
 ** Early Init
 Emacs will read the contents of ~early-init.el~ if it is present. This happens before the package system
 and the GUI are initialized, so it it a place to do early initialization stuff.
@@ -64,6 +65,7 @@ The following block of code gets tangled into ~~.config/emacs/early-init.el~.
   (setq comp-deferred-compilation nil)
   ;;; early-init.el ends here
 #+end_src
+
 * Package Management
 ** Straight
  [[https://github.com/radian-software/straight.el][straight.el]] is a package manager. The following block of code, taken from the ~straight.el~ README, sets it up.
@@ -88,12 +90,14 @@ Make sure that ~straight.el~ is used as the default package manager.
 #+begin_src emacs-lisp
   (setq straight-use-package-by-default t)
 #+end_src
+
 *** Integration with ~use-package~
 A popular macro for package installation and configuration is [[https://github.com/jwiegley/use-package][use-package]].  The following makes use-package use ~straight.el~ for package management.
 
 #+begin_src emacs-lisp
   (straight-use-package 'use-package)
 #+end_src
+
 * General Settings
 ** Help
 *** Which Key
@@ -104,12 +108,14 @@ The [[https://github.com/justbur/emacs-which-key][which-key]] utility shows poss
     :config
     (which-key-mode))
 #+end_src
+
 *** Discover
 [[https://github.com/mickeynp/discover.el][Discover]] provides help via context menus.
 
 #+begin_src emacs-lisp
   (use-package discover)
 #+end_src
+
 ** Shell Path
 The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] package imports the shell environment into emacs.
 
@@ -119,6 +125,7 @@ The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] pa
     (when (daemonp)
       (exec-path-from-shell-initialize)))
 #+end_src
+
 ** Version Control
 *** Magit
 [[https://magit.vc/][Magit]] is an interface to [[https://git-scm.com/][Git]].
@@ -126,6 +133,7 @@ The [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] pa
 #+begin_src emacs-lisp
   (use-package magit)
 #+end_src
+
 ** Terminal Emulation
 *** Vterm
 I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal in Emacs.
@@ -138,6 +146,7 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
       (vterm t))
     :bind ("<s-return>" . lorcab/vterm))
 #+end_src
+
 ** Windows, Buffers and Workspaces
 *** Bufler
  [[https://github.com/alphapapa/bufler.el][Bufler]] allows you to group buffers into workspaces. 
@@ -149,12 +158,14 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
     ("C-x x s" . bufler-workspace-frame-set)
     :config (bufler-mode))
 #+end_src
+
 *** Burly
 [[https://github.com/alphapapa/burly.el][Burly]] allows you to save and restore frame and window configurations.
 
 #+begin_src emacs-lisp
   (use-package burly)
 #+end_src
+
 *** Ace Window
 [[https://github.com/abo-abo/ace-window][ace-window]] allows me to easily switch between windows in Emacs
 
@@ -167,12 +178,14 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
        '(aw-leading-char-face
          ((t (:inherit ace-jump-face-foreground :height 3.0)))))))
 #+end_src
+
 ** Authentication
 I want all my passwords encrypted.
 
 #+begin_src emacs-lisp
   (setq auth-sources '("~/.authinfo.gpg"))
 #+end_src
+
 * Org Mode
 ** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
@@ -211,6 +224,7 @@ I customize a few elements. Althought I'm using a non-proportional font in org-m
    '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
    '(org-date ((t (:inherit (shadow fixed-pitch))))))  
 #+end_src
+
 ** Org Agenda
 The agenda reports on tasks and their states. It needs to know in which files it should look for tasks. I want it to look in a few files in ~~/org/gtd/~. In addition, it should look in any file named ~README.org~ in any directory under ~~/git~.
 
@@ -230,12 +244,14 @@ The agenda reports on tasks and their states. It needs to know in which files it
                    t
                    directory-files-no-dot-files-regexp)))))
 #+end_src
+
 ** Org Tags
 Since i'm using a non-proportional fonts in org-mode, tags don't align well and it looks ugly. 
 
 #+begin_src emacs-lisp
   (setq org-tags-column 0)
 #+end_src
+
 ** Org Roam
 [[https://www.orgroam.com/][Org-roam]] is an extension to ~org-mode~ that implments a personal knowledge management system.
 
@@ -252,6 +268,7 @@ Since i'm using a non-proportional fonts in org-mode, tags don't align well and 
     :config
     (org-roam-setup))
 #+end_src
+
 *** Org Roam UI
 [[https://github.com/org-roam/org-roam-ui][org-roam-ui]] provide visualization of the ~org-roam~ database.
 
@@ -268,12 +285,14 @@ Since i'm using a non-proportional fonts in org-mode, tags don't align well and 
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 #+end_src
+
 ** Org Present
 [[https://github.com/rlister/org-present][org-present-mode]] is a simple presentation mode for org-mode files.
 
 #+begin_src emacs-lisp
   (use-package org-present)
 #+end_src
+
 ** Org Modern
 I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives a "modern" style to ~org-mode~.
 
@@ -286,6 +305,7 @@ I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives 
     :config
     (global-org-modern-mode))
 #+end_src
+
 ** Org Auto Tangle
 [[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]] is used to automatically tangle org files on save.
 
@@ -293,6 +313,7 @@ I'm trying out [[https://github.com/minad/org-modern][org-modern]], which gives 
   (use-package org-auto-tangle
     :hook org-mode)
 #+end_src
+
 * Text
 ** Coding System
 Use UTF-8. I'm not sure all these are needed, but I'll play it safe for now and remove the ones that are not needed.
@@ -303,6 +324,7 @@ Use UTF-8. I'm not sure all these are needed, but I'll play it safe for now and 
   (set-keyboard-coding-system 'utf-8)
   (setq default-buffer-file-coding-system 'utf-8)
 #+end_src
+
 ** Fonts
 Here I set the fonts I use. I'm probably going to try a few fonts out until I find something that works well for me.
 
@@ -320,6 +342,7 @@ I also set up some CJK fonts. I'm currently only using Japanese but plan to lear
   (set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
   (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
 #+end_src
+
 ** Completion
 *** Vertico
 #+begin_src emacs-lisp
@@ -327,6 +350,7 @@ I also set up some CJK fonts. I'm currently only using Japanese but plan to lear
     :config
     (vertico-mode))
 #+end_src
+
 *** Marginalia
 The [[https://github.com/minad/marginalia][Marginalia]] package provides marginalia to minibuffer completions.
 
@@ -335,6 +359,7 @@ The [[https://github.com/minad/marginalia][Marginalia]] package provides margina
     :config
     (marginalia-mode))
 #+end_src
+
 *** Orderless
 The [[https://github.com/oantolin/orderless][orderless]] package gives an orderless completion style.
 
@@ -347,6 +372,7 @@ The [[https://github.com/oantolin/orderless][orderless]] package gives an orderl
           '((file (styles partial-completion)))))
 
 #+end_src
+
 *** Corfu
 [[https://github.com/minad/corfu][Corfu]] provides a completion popup for completion at point.
 
@@ -358,6 +384,7 @@ The [[https://github.com/oantolin/orderless][orderless]] package gives an orderl
     :init
     (global-corfu-mode))
 #+end_src
+
 *** Consult
 [[https://github.com/minad/consult][Consult]] provides search and navigation commands. I'm currently getting familiar with it, so
 this configuration is going to change over time.
@@ -368,6 +395,7 @@ this configuration is going to change over time.
     ("M-s l" . consult-line)
     ("M-s L" . consult-line-multi))
 #+end_src
+
 ** Ledger Mode
 [[https://www.ledger-cli.org/][Ledger]] is a powerful personal accounting system for the command-line. Of course, there is a [[https://www.ledger-cli.org/3.0/doc/ledger-mode.html][ledger-mode]] for Emacs as well.
 
@@ -377,12 +405,14 @@ this configuration is going to change over time.
     (setq ledger-clear-whole-transactions 1)
     :mode "\\.ledger\\'")
 #+end_src
+
 ** Systemd Mode
 I frequently edit systemd unit files, so [[https://github.com/holomorph/systemd-mode][systemd-mode]] is handy.
 
 #+begin_src emacs-lisp
   (use-package systemd)
 #+end_src
+
 ** Snippets
 [[https://github.com/joaotavora/yasnippet][Yasnippet]] provides snippets from Emacs.
 
@@ -391,18 +421,21 @@ I frequently edit systemd unit files, so [[https://github.com/holomorph/systemd-
      :config
      (yas-global-mode 1))
  #+end_src
+ 
 ** Visual Fill Column
 [[https://codeberg.org/joostkremers/visual-fill-column][visual-fill-column]] mimics the effect of ~fill-column~ in visual-line-mode.
 
 #+begin_src emacs-lisp
   (use-package visual-fill-column)
 #+end_src
+
 ** Rainbow identifiers
 [[https://github.com/Fanael/rainbow-identifiers][Rainbow Identifiers]] mode is a minor mode providing highlighting of identifiers based on their name.
 
 #+begin_src emacs-lisp
   (use-package rainbow-identifiers)
 #+end_src
+
 * UI
 ** General
 Highlight the current line in programming and text modes.
@@ -411,6 +444,7 @@ Highlight the current line in programming and text modes.
   (add-hook 'prog-mode-hook #'hl-line-mode)
   (add-hook 'text-mode-hook #'hl-line-mode)
 #+end_src
+
 ** All the Icons
 The [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] package is a utility package to install some icon fonts and use them within Emacs.
 
@@ -432,6 +466,7 @@ The following package adds icon support to dired-mode.
     :hook
     (dired-mode . all-the-icons-dired-mode))
 #+end_src
+
 ** Dashboard
 Currently, I use [[https://github.com/emacs-dashboard/emacs-dashboard][emacs-dashboard]] as my start-up buffer.
 
@@ -469,17 +504,18 @@ Currently, I use [[https://github.com/emacs-dashboard/emacs-dashboard][emacs-das
             (lambda (&rest _) (find-file "~/git/emacs.d/README.org")))
            )))
 #+end_src
+
 ** Theme
-*** Modus Themes
+*** Ef Themes
+I really like  [[https://github.com/protesilaos/ef-themes][ef-themes]].
+
 #+begin_src emacs-lisp
-  (use-package modus-themes
+  (use-package ef-themes
     :init
-    (setq modus-themes-bold-constructs t
-          modus-themes-italic-constructs t
-          modus-themes-mixed-fonts t)
     :config
-    (load-theme 'modus-vivendi-tinted :no-confirm))
+    (ef-themes-select 'ef-frost))
 #+end_src
+
 ** Modeline
 I use [[https://github.com/seagle0128/doom-modeline][doom-modeline]] as my modeline.
 
@@ -503,6 +539,7 @@ Display the time on the modeline.
   (setq display-time-24hr-format t)
   (display-time-mode t)
 #+end_src
+
 ** Emoji
 The [[https://github.com/iqbalansari/emacs-emojify][emojify]] package is used to display emojis.
 
@@ -512,6 +549,7 @@ The [[https://github.com/iqbalansari/emacs-emojify][emojify]] package is used to
                 emojify-emoji-styles '(unicode))
     :hook (after-init . global-emojify-mode))
 #+end_src
+
 * Programming
 ** Project Management
 *** Projectile
@@ -524,6 +562,7 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (projectile-mode +1))
 #+end_src
+
 *** Forge
 [[https://github.com/magit/forge][Forge]] is used to connect to Git forges (GitLab, GitHub, etc).
 
@@ -531,6 +570,7 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
   (use-package forge
     :after magit)
 #+end_src
+
 ** Eglot
 [[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP).
 
@@ -540,6 +580,7 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
     :config
     (setq read-process-output-max (* 1024 1024)))
 #+end_src
+
 ** Scheme
 [[https://github.com/emacsmirror/geiser][Geiser]] allows Emacs to connect to various Scheme REPLs. I use Guile Scheme.
 
@@ -547,6 +588,7 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
   (use-package geiser-guile
     :ensure t)
 #+end_src
+
 ** Go
 [[https://github.com/dominikh/go-mode.el][go-mode]] provides a major mode for Go. I use it with Eglot. This requires installing ~gopls~, which is done with:
 
@@ -568,6 +610,7 @@ I couldn't get Eglot to automatically organize imports, so for now I'm letting ~
     (add-hook 'go-mode-hook 'eglot-ensure)
     (add-hook 'before-save-hook 'gofmt-before-save))
 #+end_src
+
 ** JavaScript
 I'm using the built-in js-mode, together with Eglot. Eglot requires the TypeScript language server to be installed with:
 
@@ -578,6 +621,7 @@ I'm using the built-in js-mode, together with Eglot. Eglot requires the TypeScri
 #+begin_src emacs-lisp
   (add-hook 'js-mode-hook 'eglot-ensure)
 #+end_src
+
 ** JSON
 [[https://github.com/joshwnj/json-mode][json-mode]] provides a major mode for working with JSON files. I use it with Eglot, without really knowing what the benefits are. I guess I'll figure it out eventually.
 
@@ -621,6 +665,7 @@ Associate the ~.rest~ extension with restclient-mode.
   (add-to-list 'auto-mode-alist
                '("\\.rest\\'" . restclient-mode))
 #+end_src
+
 * Communication
 ** Mail
 *** Email Address
@@ -630,6 +675,7 @@ Set these, since mu4e uses them.
   (setq user-full-name "Lorenzo Cabrini"
         user-mail-address "lorenzo.cabrini@gmail.com")
 #+end_src
+
 *** IMAP
 I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
 
@@ -675,6 +721,7 @@ I use [[https://github.com/djcb/mu][mu4e]] to read mails in Emacs.
   (setq mastodon-instance-url "https://emacs.ch"
         mastodon-active-user "lorenzocabrini")
 #+end_src
+
 ** IRC
 Emacs comes with a built-in IRC client called ERC.
 
@@ -692,12 +739,14 @@ Emacs comes with a built-in IRC client called ERC.
   (require 'erc-services)
   (erc-services-mode 1)
 #+end_src
+
 ** Matrix
 [[https://github.com/alphapapa/ement.el][Ement.el]] is a Matrix client for Emacs.
 
 #+begin_src emacs-lisp
   (use-package ement)
 #+end_src
+
 ** Telegram
 [[https://github.com/zevlg/telega.el][telega.el]] is a Telegram client for Emacs. It requires [[https://github.com/tdlib/td][TDLib]] to be installed and it can be really picky with the version. I had to try a few combinations before I got it to work.
 
@@ -712,6 +761,7 @@ Emacs comes with a built-in IRC client called ERC.
     :commands (telega)
     :init (setq telega-server-libs-prefix "/usr"))
 #+end_src
+
 * News & Feeds
 ** Elfeed
 I use [[https://github.com/skeeto/elfeed][elfeed]] for subscribing to RSS feeds.
@@ -732,6 +782,7 @@ I use a nifty little utility called [[https://github.com/remyhonig/elfeed-org][e
 
   (setq rmh-elfeed-org-files (list "~/org/feeds.org"))
 #+end_src
+
 ** Elfeed Tube
 [[https://github.com/karthink/elfeed-tube][Elfeed Tube]] is an extension to elfeed which adds improved YouTube integration.
 
@@ -757,6 +808,7 @@ elfeed-tube-mpv gives better MPV support
                 ("C-c C-f" . elfeed-tube-mpv-follow-mode)
                 ("C-c C-w" . elfeed-tube-mpv-where)))
 #+end_src
+
 * Multimedia
 ** EMMS
 I use [[https://www.gnu.org/software/emms/][EMMS]] for playing audio in Emacs. I haven't spent much time configuring it, however.
@@ -776,12 +828,14 @@ Org-mode integration is done with [[https://github.com/jagrg/org-emms][org-emms]
 #+begin_src emacs-lisp
   (use-package org-emms)
 #+end_src
+
 ** MPV
 [[https://github.com/kljohann/mpv.el][mpv.el]] is used to control mpv from within Emacs.
 
 #+begin_src emacs-lisp
   (use-package mpv)
 #+end_src
+
 * Education
 ** Spaced Repetition
 [[https://www.leonrische.me/fc/index.html][org-fc]] is a spaced repetition system for Emacs.
@@ -831,6 +885,7 @@ Increase the text scale before review and reset it back after the review.
   (add-hook 'org-fc-before-setup-hook (lambda () (text-scale-set 3)))
   (add-hook 'org-fc-after-review-hook (lambda () (text-scale-set 0)))
 #+end_src
+
 *** TODO reset text scale on all org-fc buffers after review
 ** Kanji Mode
 [[https://github.com/wsgac/kanji-mode][kanji-mode]] shows stroke order of kanji and is able to transcribe text to hiragana or romaji.
@@ -838,6 +893,7 @@ Increase the text scale before review and reset it back after the review.
 #+begin_src emacs-lisp
   (use-package kanji-mode)
 #+end_src
+
 * Religion
 I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs front-end to ~diatheke~, which needs to be installed. Also, one or more texts need to be installed.
 
@@ -849,12 +905,14 @@ I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs fr
     (dtk-module-category "Biblical Texts")
     (dtk-word-wrap t))
 #+end_src
+
 * Fun Stuff
 ** Sudoku
  With [[https://github.com/zevlg/sudoku.el][sudoku.el]] you can play sudoku in Emacs.
 #+begin_src emacs-lisp
   (use-package sudoku)
 #+end_src
+
 * Snippet Library
 I'm currently maintaining my snippets in this file. Each snippet gets tangled into its own file. It feels really conventient to have the snippets here for now. I've been very bad at maintaing my own snippets in the past, by having them in the same file as my Emacs configuration is handy for me, at least for now.
 
@@ -897,4 +955,5 @@ Make sure the snippet directory for ~go-mode~ exists.
      $0
   }
 #+end_src
+
 * References
