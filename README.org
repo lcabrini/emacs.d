@@ -332,7 +332,7 @@ I really like the [[https://git.sr.ht/~protesilaos/iosevka-comfy][Iosekva Comfy]
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil :family "Iosevka Comfy" :height 105)
   (set-face-attribute 'fixed-pitch nil :family "Iosevka Comfy" :height 105)
-  (set-face-attribute 'variable-pitch nil :family "Iosevka Comfy Wide Duo" :height 105)
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Comfy Duo" :height 105)
 #+end_src
 
 I also set up some CJK fonts. I'm currently only using Japanese but plan to learn Hangul at some point.
@@ -653,7 +653,7 @@ I frequently have to deal with fairly large, compacted JSON files. This tends to
 #+end_src
 
 *** TODO check if the JSON file has long lines before piping through jq
-**  REST Client
+** REST Client
 [[https://github.com/pashky/restclient.el][restclient.el]] is a REST client for Emacs.
 
 #+begin_src emacs-lisp
