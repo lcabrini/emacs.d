@@ -1,0 +1,45 @@
+#+TITLE: Snippets for Yasnippet
+#+AUTHOR: Lorenzo Cabrini
+#+AUTO_TANGLE: t
+#+FILETAGS: emacs:yasnippet:
+
+* Introduction
+This is my personal collection of snippets for [[https://github.com/joaotavora/yasnippet][YASnippet]]. I don't use any ready-made collections, as I prefer to just maintain my own.
+* Snippets
+** Go
+*** Conditionals
+
+#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/ife"
+  # -*- snippet -*-
+  # name: if err
+  # key: _ife
+  # --
+  if err != nil {
+     fmt.Printf("Error: %s\n", err.Error())
+     $0
+  }
+#+end_src
+
+*** Loops
+#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/forr"
+  # -*- snippet -*-
+  # name: for range
+  # key: _forr
+  # --
+  for _, $1 := range $2 {
+      $0
+  }
+#+end_src
+
+*** Functions
+
+#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/main" :mkdirp yes
+  # -*- snippet -*-
+  # name: func main()
+  # key: _m
+  # --
+  func main() {
+       $0
+  }
+#+end_src
+

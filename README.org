@@ -6,7 +6,7 @@
 #+FILETAGS: :emacs:config:
 
 * Introduction
-This is my personal Emacs configuration. For convenience, I've also got my collection of snippets near the end of the file. Since this is just an org file, all the code blocks get tangled out into various different files.
+This is my personal Emacs configuration.
 
 On Jan. 1, 2023 I decided to delete my Emacs configuration file and to start all over. The old configuration had become a mess. I wanted to start afresh.
 * Bootstrap
@@ -423,7 +423,7 @@ I frequently edit systemd unit files, so [[https://github.com/holomorph/systemd-
      :config
      (yas-global-mode 1))
  #+end_src
- 
+
 ** Visual Fill Column
 [[https://codeberg.org/joostkremers/visual-fill-column][visual-fill-column]] mimics the effect of ~fill-column~ in visual-line-mode.
 
@@ -953,49 +953,6 @@ I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs fr
  With [[https://github.com/zevlg/sudoku.el][sudoku.el]] you can play sudoku in Emacs.
 #+begin_src emacs-lisp
   (use-package sudoku)
-#+end_src
-
-* Snippet Library
-I'm currently maintaining my snippets in this file. Each snippet gets tangled into its own file. It feels really conventient to have the snippets here for now. I've been very bad at maintaing my own snippets in the past, by having them in the same file as my Emacs configuration is handy for me, at least for now.
-
-When things begin to feel too heavy or saving the file becomes to slow, I'll move the snippets into their own files.
-** Go
-Make sure the snippet directory for ~go-mode~ exists.
-
-#+begin_src emacs-lisp
-  (unless (file-directory-p "~/.config/emacs/snippets/go-mode")
-    (make-directory "~/.config/emacs/snippets/go-mode"))
-#+end_src
-
-#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/main"
-  # -*- snippet -*-
-  # name: func main()
-  # key: _m
-  # --
-  func main() {
-       $0
-  }
-#+end_src
-
-#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/forr"
-  # -*- snippet -*-
-  # name: forr
-  # key: _forr
-  # --
-  for _, $1 := range $2 {
-      $0
-  }
-#+end_src
-
-#+begin_src snippet :tangle "~/.config/emacs/snippets/go-mode/ife"
-  # -*- snippet -*-
-  # name: if (err)
-  # key: _ife
-  # --
-  if err != nil {
-     fmt.Printf("Error: %s\n", err.Error())
-     $0
-  }
 #+end_src
 
 * References
