@@ -1,9 +1,10 @@
 #+TITLE: Personal Emacs Configuration
 #+AUTHOR: Lorenzo Cabrini
+#+CATEGORY: emacs.d
 #+PROPERTY: header-args :results silent :tangle "~/.config/emacs/init.el"
 #+AUTO_TANGLE: t
 #+OPTIONS: toc:3
-#+FILETAGS: :emacs:
+
 
 * Introduction
 This is my personal Emacs configuration.
@@ -194,6 +195,7 @@ Store any customizations into ~custom.el~.
   (if (file-exists-p custom-file)
       (load custom-file))
 #+end_src
+
 * Org Mode
 ** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
@@ -214,6 +216,7 @@ I'm trying out a non-proportional font in ~org-mode~. I also enable word wrap.
   (add-hook 'org-mode-hook 'visual-line-mode)
 #+end_src
 
+** UI Customization
 I customize a few elements. Althought I'm using a non-proportional font in org-mode, I don't want that to apply to code blocks. Also, there are some ~org-mode~ elements I find difficult to read, so I customize them.
 
 #+begin_src emacs-lisp
@@ -234,6 +237,55 @@ I customize a few elements. Althought I'm using a non-proportional font in org-m
 #+end_src
 
 *** TODO get org-hide to work properly in emacsclient
+** Org Capture
+For now, I only have a capture template to capture into my inbox.
+
+#+begin_src emacs-lisp
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/org/gtd/inbox.org" "Inbox")
+                                 "* TODO %i%?")))
+#+end_src
+
+Set up keybinding for org-capture.
+
+#+begin_src emacs-lisp
+  (define-key global-map (kbd "C-c c") 'org-capture)
+#+end_src
+
+** Org Refile
+I set up my refiling targets here, along with a few settings.
+
+#+begin_src emacs-lisp
+  (setq org-outline-path-complete-in-steps nil
+        org-refile-use-outline-path 'file
+        org-refile-targets '(("~/org/gtd/projects.org" :level . 1)
+                             ("~/org/gtd/tasks.org" :level . 1)
+                             ("~/org/gtd/amadaa.org" :level . 1)
+                             ("~/org/gtd/someday.org" :level . 1)
+                             ("~/org/gtd/archive.org" :level . 1)))
+#+end_src
+
+** Org Log
+Set up the activities that should be logged.
+
+#+begin_src emacs-lisp
+  (setq org-log-into-drawer t
+        org-log-refile 'note)
+#+end_src
+
+** Org Todo
+The following are the keywords that I use for tasks.
+
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO(t)"
+                    "NEXT(n!)"
+                    "WAITING(w@/!)"
+                    "|"
+                    "DONE(d!)"
+                    "CANCELED(c@)")))
+#+end_src
+
 ** Org Agenda
 The agenda reports on tasks and their states. It needs to know in which files it should look for tasks. I want it to look in a few files in ~~/org/gtd/~. In addition, it should look in any file named ~README.org~ in any directory under ~~/git~.
 
