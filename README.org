@@ -186,14 +186,14 @@ I want all my passwords encrypted.
   (setq auth-sources '("~/.authinfo.gpg"))
 #+end_src
 
-** Safe Local Variables
-I have a few projects where, for historical reasons, I maintain the project task list in the project directory itself. The following directory local variable should be marked as safe in these projects.
+** Customization
+Store any customizations into ~custom.el~.
 
 #+begin_src emacs-lisp
-  (add-to-list 'safe-local-variable-values
-               '((org-refile-targets (nil :tag . "DONE"))))     
+  (setq custom-file "~/.config/emacs/custom.el")
+  (if (file-exists-p custom-file)
+      (load custom-file))
 #+end_src
-
 * Org Mode
 ** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
