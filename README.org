@@ -193,6 +193,7 @@ I have a few projects where, for historical reasons, I maintain the project task
   (add-to-list 'safe-local-variable-values
                '((org-refile-targets (nil :tag . "DONE"))))     
 #+end_src
+
 * Org Mode
 ** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
