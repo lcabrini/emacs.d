@@ -3,7 +3,7 @@
 #+PROPERTY: header-args :results silent :tangle "~/.config/emacs/init.el"
 #+AUTO_TANGLE: t
 #+OPTIONS: toc:3
-#+FILETAGS: :emacs:config:
+#+FILETAGS: :emacs:
 
 * Introduction
 This is my personal Emacs configuration.
