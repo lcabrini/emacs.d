@@ -1024,4 +1024,9 @@ I use [[https://github.com/dtk01/dtk][dtk.el]] for Bible study. It's an Emacs fr
   (use-package sudoku)
 #+end_src
 
+* To Do
+** TODO evaluate ejira
+[[https://github.com/nyyManni/ejira][GitHub]]
+** TODO evaluate org-jira
+[[https://github.com/ahungry/org-jira][GitHub]]
 * References
