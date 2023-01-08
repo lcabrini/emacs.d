@@ -186,6 +186,13 @@ I want all my passwords encrypted.
   (setq auth-sources '("~/.authinfo.gpg"))
 #+end_src
 
+** Safe Local Variables
+I have a few projects where, for historical reasons, I maintain the project task list in the project directory itself. The following directory local variable should be marked as safe in these projects.
+
+#+begin_src emacs-lisp
+  (add-to-list 'safe-local-variable-values
+               '((org-refile-targets (nil :tag . "DONE"))))     
+#+end_src
 * Org Mode
 ** Basic Org Configuration
 I use [[https://orgmode.org/][org-mode]] extensively. Set it up with a few reasonable defaults.
@@ -345,6 +352,15 @@ I also set up some CJK fonts. I'm currently only using Japanese but plan to lear
 #+end_src
 
 *** TODO the CJK font setup doesn't work. Need to figure out why
+** Whitespace
+[[https://github.com/lewang/ws-butler][ws-butler]] trims whitespaces from the end of lines.
+
+#+begin_src emacs-lisp
+  (use-package ws-butler
+    :init
+    (ws-butler-global-mode t))
+#+end_src
+
 ** Completion
 *** Vertico
 #+begin_src emacs-lisp
