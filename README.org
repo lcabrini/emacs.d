@@ -344,6 +344,7 @@ I also set up some CJK fonts. I'm currently only using Japanese but plan to lear
   (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
 #+end_src
 
+*** TODO the CJK font setup doesn't work. Need to figure out why
 ** Completion
 *** Vertico
 #+begin_src emacs-lisp
