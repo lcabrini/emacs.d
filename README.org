@@ -522,6 +522,7 @@ Of late, I've really warmed to the tab bar.
 #+begin_src emacs-lisp
   (tab-bar-mode 1)
 #+end_src
+
 ** All the Icons
 The [[https://github.com/domtronn/all-the-icons.el][all-the-icons]] package is a utility package to install some icon fonts and use them within Emacs.
 
@@ -664,6 +665,15 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
 #+begin_src emacs-lisp
   (use-package geiser-guile
     :ensure t)
+#+end_src
+
+** Common Lisp
+[[https://github.com/slime/slime][SLIME]] is the Superior Lisp Interaction Mode for Emacs.
+
+#+begin_src emacs-lisp
+  (use-package slime
+    :init
+    (setq inferior-lisp-program "sbcl"))
 #+end_src
 
 ** Go
