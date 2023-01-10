@@ -153,6 +153,8 @@ I use [[https://github.com/akermu/emacs-libvterm][vterm]] as my default terminal
 
 #+begin_src emacs-lisp
   (use-package bufler
+    :hook
+    ((after-init . bufler-workspace-mode))
     :bind
     ("C-x x b" . bufler-switch-buffer)
     ("C-x x s" . bufler-workspace-frame-set)
@@ -521,6 +523,9 @@ Of late, I've really warmed to the tab bar.
 
 #+begin_src emacs-lisp
   (tab-bar-mode 1)
+  (tab-line-mode -1)
+  (global-tab-line-mode -1)
+  (global-set-key (kbd "C-x x d" 'tab-bar-select-tab-by-name))
 #+end_src
 
 ** All the Icons
