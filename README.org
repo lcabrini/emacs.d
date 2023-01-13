@@ -714,25 +714,36 @@ I'm using the built-in js-mode, together with Eglot. Eglot requires the TypeScri
   (add-hook 'js-mode-hook 'eglot-ensure)
 #+end_src
 
-** Svelte
-[[https://github.com/leafOfTree/svelte-mode][svelte-mode]] provides support for working with Svelte files.
+** Web Mode
+[[https://github.com/fxbois/web-mode][web-mode]] provides support for a large number of HTML template engines and JavaScript frameworks.
 
 #+begin_src emacs-lisp
-  (use-package svelte-mode
-    :ensure t)
+  (use-package web-mode)
 #+end_src
 
-Svelte provides a language server. It can be installed with:
+** Svelte
+Set up a svelte-mode as a derived mode of web-mode.
+
+#+begin_src emacs-lisp
+  (define-derived-mode svelte-mode web-mode "Svelte"
+    "Major mode for editing Svelte files")
+  (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
+#+end_src
+
+The Svelte language server needs to be installed with
 
 #+begin_example
 $ npm i -g svelte-language-server
 #+end_example
 
-The language server is currently not added to the Eglot language servers, so I add it manually.
+The language server is currently not added to the Eglot language servers, so add it manually. Also make sure eglot is started with svelte-mode.
 
 #+begin_src emacs-lisp
-  (add-to-list 'eglot-server-programs
-               '(svelte-mode . ("svelteserver" "--stdio")))
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '(svelte-mode . ("svelteserver" "--stdio"))))
+
+  (add-hook 'svelte-mode-hook #'eglot-ensure)
 #+end_src
 
 ** JSON
@@ -765,13 +776,6 @@ I frequently have to deal with fairly large, compacted JSON files. This tends to
 #+end_src
 
 *** TODO check if the JSON file has long lines before piping through jq
-** Web Mode
-[[https://github.com/fxbois/web-mode][web-mode]] provides support for a large number of HTML template engines.
-
-#+begin_src emacs-lisp
-  (use-package web-mode)
-#+end_src
-
 ** Emmet
 [[https://github.com/smihica/emmet-mode][emmet-mode]] is a form of simple DSL that produces HTML.
 
