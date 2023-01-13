@@ -525,7 +525,7 @@ Of late, I've really warmed to the tab bar.
   (tab-bar-mode 1)
   (tab-line-mode -1)
   (global-tab-line-mode -1)
-  (global-set-key (kbd "C-x x d" 'tab-bar-select-tab-by-name))
+  (global-set-key (kbd "C-x x d") 'tab-bar-select-tab-by-name)
 #+end_src
 
 ** All the Icons
