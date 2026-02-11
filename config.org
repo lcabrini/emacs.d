@@ -1,0 +1,183 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Lorenzo Cabrini
+#+CATEGORY: emacs.d
+#+PROPERTY: header-args :results silent :tangle "~/.emacs.d/init.el"
+#+AUTO_TANGLE: t
+#+OPTIONS: toc:3
+
+* Introduction
+This is my personal [[https://gnu.org/software/emacs][Emacs]] configuration.
+
+Over the years, my configuration grew larger and larger. At some point I began
+adding things I really didn't need and eventually Emacs began feeling slow and
+sluggish.
+
+So on 10 February 2026 I decided to start all over. This time I'm going to try
+my best to keep the configuration minimal, adding only things that I really do
+use.
+
+* Init file header
+There is an Emacs convention to add a special comment header to Lisp libraries
+(read about it [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Headers.html][here]]), so I do that here.
+
+#+begin_src emacs-lisp
+  ;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
+
+  ;;; Copyright (C) 2026 Lorenzo Cabrini
+
+  ;;; Author: Lorenzo Cabrini <lorenzo.cabrini@gmail.com>
+  ;;; Keywords: configuration
+  ;;; URL: https://github.com/lcabrini/emacs.d
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+
+* Early Init
+Emacs will read the contents of ~early-init.el~ if it is present. This happens
+before the package system and the GUI are initialized, so it it a place to do
+early initialization stuff.
+
+The following block of code gets tangled into ~~/.emacs.d/early-init.el~.
+
+#+begin_src emacs-lisp :tangle "~/.emacs.d/early-init.el"
+  ;;; early-init.el --- Early initialization -*- lexical-binding: t -*-
+
+  ;;; Copyright (C) 2026 Lorenzo Cabrini
+
+  ;;; Author: Lorenzo Cabrini <lorenzo.cabrini@gmail>
+  ;;; Keywords: configuration
+  ;;; URL: https://github.com/lcabrini/emacs.d
+
+  ;;; Commentary:
+
+  ;;; Code:
+
+  ;; Inhibit package.el loading packages prior to init.el loading
+  (setq package-enable-at-startup nil)
+
+  ;; Disable some GUI elements early so that they don't briefly show up when Emacs
+  ;; first fires up
+  (push '(menu-bar-lines . 0) default-frame-alist)
+  (push '(tool-bar-lines . 0) default-frame-alist)
+  (push '(vertical-scroll-bars) default-frame-alist)
+
+  ;; Disable GUI elements
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq inhibit-splash-screen t)
+  (setq use-file-dialog nil)
+
+  ;; Maximize the Emacs window
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+  ;; Show column number
+  (setq column-number-mode t)
+  
+  (setq comp-deferred-compilation nil)
+  ;;; early-init.el ends here
+#+end_src
+
+* Straight package manager
+ [[https://github.com/radian-software/straight.el][straight.el]] is a package manager. The following block of code, taken from the
+ ~straight.el~ README, sets it up.
+
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 6))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
+Make sure that ~straight.el~ is used as the default package manager.
+
+#+begin_src emacs-lisp
+  (setq straight-use-package-by-default t)
+#+end_src
+
+A popular macro for package installation and configuration is [[https://github.com/jwiegley/use-package][use-package]].
+The following makes use-package use ~straight.el~ for package management.
+
+#+begin_src emacs-lisp
+  (straight-use-package 'use-package)
+#+end_src
+* Terminal emulation 
+I use [[https://github.com/akermu/emacs-libvterm][vterm]] for terminal emulation in Emacs.
+
+ #+begin_src emacs-lisp
+  (use-package vterm
+    :config
+    (defun lorcab/vterm ()
+      (interactive)
+      (vterm t))
+    :bind ("<s-return>" . lorcab/vterm))
+#+end_src
+
+* Theme
+For now, I'm using *modus-vivendi* from the [[https://github.com/protesilaos/modus-themes][modus-themes]] pacakge. This theme
+comes with Emacs.
+
+#+begin_src emacs-lisp
+  (load-theme 'modus-vivendi)
+#+end_src
+
+* Index
+Open up the index file by default.
+
+#+begin_src emacs-lisp
+  (find-file "~/Org/index.org")
+#+end_src
+
+* Org-mode
+#+begin_src emacs-lisp
+  (use-package org
+    :straight (:type built-in))
+    #+end_src
+    
+* Org-journal
+#+begin_src emacs-lisp
+  (use-package org-journal
+    :ensure t
+    :defer t
+    :init
+    (setq org-journal-prefix-key "C-c j ")
+    :config
+    (setq org-journal-dir "~/Org/journal/"))
+#+end_src
+
+* Org-modern
+[[https://github.com/minad/org-modern][org-modern]] gives a "modern" look to org files.
+
+#+begin_src emacs-lisp
+  (use-package org-modern
+    :custom
+    (org-modern-table nil)
+    (org-modern-timestamp nil)
+    (org-modern-priority nil)
+    :config
+    (global-org-modern-mode))
+#+end_src
+
+* Org-auto-tangle
+[[https://github.com/yilkalargaw/org-auto-tangle][org-auto-tangle]] is used to automatically tangle org files on save.
+
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+* Magit
+[[https://magit.vc/][Magit]] is an interface to [[https://git-scm.com/][Git]].
+
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
