@@ -170,14 +170,14 @@ The following are the keywords that I use for tasks.
 Read files from this directory for the agenda.
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files (quote("~/Org/gtd")))
+  (setq org-agenda-files '("~/Org/gtd/projects.org"))
 #+end_src
 
 For now, I only have a capture template to capture into my inbox.
 
 #+begin_src emacs-lisp
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/org/gtd/inbox.org" "Inbox")
+                                 (file+headline "~/Org/gtd/inbox.org" "Inbox")
                                  "* TODO %i%?")))
 #+end_src
 
