@@ -154,13 +154,25 @@ Open up the index file by default.
     :straight (:type built-in))
     #+end_src
     
-* Org-agenda
+
+The following are the keywords that I use for tasks.
+
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO(t)"
+                    "NEXT(n!)"
+                    "WAITING(w@/!)"
+                    "|"
+                    "DONE(d!)"
+                    "CANCELED(c@)")))
+#+end_src
+
+Read files from this directory for the agenda.
 
 #+begin_src emacs-lisp
   (setq org-agenda-files (quote("~/Org/gtd")))
 #+end_src
 
-* Org-capture
 For now, I only have a capture template to capture into my inbox.
 
 #+begin_src emacs-lisp
@@ -175,7 +187,6 @@ Set up keybinding for org-capture.
   (define-key global-map (kbd "C-c c") 'org-capture)
 #+end_src
 
-* Org-log
 Set up the activities that should be logged.
 
 #+begin_src emacs-lisp
@@ -214,10 +225,71 @@ Set up the activities that should be logged.
   (use-package org-auto-tangle
     :hook (org-mode . org-auto-tangle-mode))
 #+end_src
+
 * Magit
 [[https://magit.vc/][Magit]] is an interface to [[https://git-scm.com/][Git]].
 
 #+begin_src emacs-lisp
   (use-package magit)
+#+end_src
+
+* Tree-sitter
+
+Add grammars to tree-sitter.
+
+#+begin_src emacs-lisp
+  (setq treesit-language-source-alist
+       '((heex "https://github.com/phoenixframework/tree-sitter-heex")
+         (elixir "https://github.com/elixir-lang/tree-sitter-elixir")))
+
+  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+#+end_src
+
+* Eglot
+
+[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP). 
+
+#+begin_src emacs-lisp
+(use-package eglot
+  :straight (:type built-in)
+  :defer t
+  :config
+  (add-to-list 'eglot-server-programs '(elixir-ts-mode "language_server.sh")))
+#+end_src
+
+* Elixir
+
+Support for [[https://elixir-lang.org/][Elixir]]. I use this with Eglot. To install the Elixir language server:
+
+#+begin_example
+  $ git clone git@github.com:elixir-lsp/elixir-ls.git
+  $ cd elixir-ls
+  $ mix deps.get
+  $ MIX_ENV=prod mix compile
+  $ MIX_ENV=prod mix elixir_ls.release2 -o ~/.local/bin
+#+end_example
+
+#+begin_src emacs-lisp
+  (use-package elixir-ts-mode
+    :hook
+    (elixir-ts-mode . eglot-ensure)
+    (before-save . eglot-format))
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq major-mode-remap-alist
+   '((elixir-mode . elixir-ts-mode)))
+#+end_src
+
+* Projectile
+
+I use [[https://github.com/bbatsov/projectile][Projectile]] for project managment.
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (projectile-mode +1))
 #+end_src
 
