@@ -111,6 +111,7 @@ The following makes use-package use ~straight.el~ for package management.
 #+begin_src emacs-lisp
   (straight-use-package 'use-package)
 #+end_src
+
 * Terminal emulation 
 I use [[https://github.com/akermu/emacs-libvterm][vterm]] for terminal emulation in Emacs.
 
@@ -139,11 +140,41 @@ Open up the index file by default.
 #+end_src
 
 * Org-mode
+
 #+begin_src emacs-lisp
   (use-package org
     :straight (:type built-in))
     #+end_src
     
+* Org-agenda
+
+#+begin_src emacs-lisp
+  (setq org-agenda-files (quote("~/Org/gtd")))
+#+end_src
+
+* Org-capture
+For now, I only have a capture template to capture into my inbox.
+
+#+begin_src emacs-lisp
+  (setq org-capture-templates '(("t" "Todo [inbox]" entry
+                                 (file+headline "~/org/gtd/inbox.org" "Inbox")
+                                 "* TODO %i%?")))
+#+end_src
+
+Set up keybinding for org-capture.
+
+#+begin_src emacs-lisp
+  (define-key global-map (kbd "C-c c") 'org-capture)
+#+end_src
+
+* Org-log
+Set up the activities that should be logged.
+
+#+begin_src emacs-lisp
+  (setq org-log-into-drawer t
+        org-log-refile 'note)
+#+end_src
+
 * Org-journal
 #+begin_src emacs-lisp
   (use-package org-journal
@@ -181,3 +212,4 @@ Open up the index file by default.
 #+begin_src emacs-lisp
   (use-package magit)
 #+end_src
+
