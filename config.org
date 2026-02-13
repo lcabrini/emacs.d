@@ -120,7 +120,7 @@ Hightlight the current line.
   (add-hook 'text-mode-hook #'hl-line-mode)
 #+end_src
 
-* Terminal emulation 
+* Terminal emulation
 I use [[https://github.com/akermu/emacs-libvterm][vterm]] for terminal emulation in Emacs.
 
  #+begin_src emacs-lisp
@@ -200,7 +200,8 @@ Set some org styling.
   (setq org-auto-align-tags nil
         org-tags-column 0
         org-agenda-tags-column 0
-        org-ellipsis "…")
+        org-ellipsis "…"
+        org-hide-emphasis-markers t)
 #+end_src
 
 Add org-habit to the modules.
