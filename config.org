@@ -160,7 +160,6 @@ The following are the keywords that I use for tasks.
 #+begin_src emacs-lisp
   (setq org-todo-keywords
         '((sequence "TODO(t)"
-                    "NEXT(n!)"
                     "WAITING(w@/!)"
                     "|"
                     "DONE(d!)"
