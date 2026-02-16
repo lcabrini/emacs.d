@@ -203,12 +203,6 @@ Set some org styling.
         org-hide-emphasis-markers t)
 #+end_src
 
-Add org-habit to the modules.
-
-#+begin_src emacs-lisp
-  (add-to-list 'org-modules 'org-habit t)
-#+end_src
-
 * Org-journal
 #+begin_src emacs-lisp
   (use-package org-journal
