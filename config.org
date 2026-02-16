@@ -150,8 +150,10 @@ Open up the index file by default.
 * Org-mode
 
 #+begin_src emacs-lisp
-  (use-package org
-    :straight (:type built-in))
+      (use-package org
+        :straight (:type built-in)
+        :init
+        (setq org-startup-folded t))
     #+end_src
     
 
