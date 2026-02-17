@@ -222,7 +222,8 @@ Set some org styling.
     :ensure t
     :defer t
     :init
-    (setq org-journal-prefix-key "C-c j ")
+    (setq org-journal-prefix-key "C-c j "
+  	org-journal-file-type 'weekly)
     :config
     (setq org-journal-dir "~/Org/journal/"))
 #+end_src
