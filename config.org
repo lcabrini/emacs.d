@@ -216,6 +216,12 @@ Set some org styling.
         org-hide-emphasis-markers t)
 #+end_src
 
+Some custom keybindings.
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c a") 'org-agenda)
+#+end_src
+
 * Org-journal
 #+begin_src emacs-lisp
   (use-package org-journal
