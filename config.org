@@ -263,6 +263,22 @@ Some custom keybindings.
   (use-package magit)
 #+end_src
 
+* Odin
+Support for the [[https://odin-lang.org/][Odin]] programming language. These are the packages I have found
+that add Odin support to Emacs:
+- [[https://github.com/mattt-b/odin-mode][odin-mode]]: major mod for Odin.
+- [[https://github.com/mattt-b/flycheck-odin][flycheck-odin]]: Flycheck for Odin
+- [[https://github.com/Sampie159/odin-ts-mode][odin-ts-mode]]: major mode for Odin (using tree-sitter)
+- [[https://github.com/DanielGavin/ols][ols]]: LSP server for Odin
+
+For the time being, I'm using odin-ts-mode. 
+
+#+begin_src emacs-lisp
+  (use-package odin-ts-mode
+  :straight (:host github :repo "Sampie159/odin-ts-mode")
+  :mode "\\.odin\\'")
+#+end_src
+
 * Tree-sitter
 
 Add grammars to tree-sitter.
@@ -270,6 +286,7 @@ Add grammars to tree-sitter.
 #+begin_src emacs-lisp
   (setq treesit-language-source-alist
        '((heex "https://github.com/phoenixframework/tree-sitter-heex")
+         (odin "https://github.com/tree-sitter-grammars/tree-sitter-odin")
          (elixir "https://github.com/elixir-lang/tree-sitter-elixir")))
 
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
