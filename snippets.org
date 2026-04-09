@@ -1,0 +1,19 @@
+#+TITLE: Snippets for Yasnippet
+#+AUTHOR: Lorenzo Cabrini
+#+AUTO_TANGLE: t
+#+FILETAGS: emacs:yasnippet:
+
+* Introduction
+This is my personal collection of snippets for [[https://github.com/joaotavora/yasnippet][YASnippet]].
+* C
+** Main
+#+begin_src snippet :tangle "~/.emacs.d/snippets/c-mode/main" :mkdirp yes
+  # -*- snippet -*-
+  # name: int main()
+  # key: _m
+  # --
+  int main(int argc, char **argv)
+  {
+
+  }
+#+end_src

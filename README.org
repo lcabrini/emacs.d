@@ -155,7 +155,7 @@ comes with Emacs.
 Open up the index file by default.
 
 #+begin_src emacs-lisp
-  (find-file "~/Org/index.org")
+  (find-file "~/Appunti/index.org")
 #+end_src
 
 * Org-mode
@@ -182,14 +182,14 @@ The following are the keywords that I use for tasks.
 Read files from this directory for the agenda.
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files '("~/Org/gtd/projects.org"))
+  (setq org-agenda-files '("~/Appunti/gtd/projects.org"))
 #+end_src
 
 For now, I only have a capture template to capture into my inbox.
 
 #+begin_src emacs-lisp
   (setq org-capture-templates '(("t" "Todo [inbox]" entry
-                                 (file+headline "~/Org/gtd/inbox.org" "Inbox")
+                                 (file+headline "~/Appunti/gtd/inbox.org" "Inbox")
                                  "* TODO %i%?")))
 #+end_src
 
@@ -232,7 +232,7 @@ Some custom keybindings.
     (setq org-journal-prefix-key "C-c j "
   	org-journal-file-type 'weekly)
     :config
-    (setq org-journal-dir "~/Org/journal/"))
+    (setq org-journal-dir "~/Appunti/journal/"))
 #+end_src
 
 * Org-modern
@@ -329,7 +329,6 @@ Support for [[https://elixir-lang.org/][Elixir]]. I use this with Eglot. To inst
 #+end_src
 
 * Projectile
-
 I use [[https://github.com/bbatsov/projectile][Projectile]] for project managment.
 
 #+begin_src emacs-lisp
@@ -339,4 +338,11 @@ I use [[https://github.com/bbatsov/projectile][Projectile]] for project managmen
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (projectile-mode +1))
 #+end_src
+* Yasnippet
+[[https://github.com/joaotavora/yasnippet][Yasnippet]] is a package to provide snippets for Emacs.
 
+#+begin_src  emacs-lisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode 1))
+#+end_src
