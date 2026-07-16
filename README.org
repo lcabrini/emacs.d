@@ -301,7 +301,7 @@ For the time being, I'm using odin-ts-mode.
 #+end_src
 
 #+begin_src emacs-lisp
-  (add-hook 'go-mode-hook
+  (add-hook 'go-ts-mode-hook
   	  (lambda()
   	    (setq indent-tabs-mode t)
   	    (setq tab-width 4)
