@@ -263,6 +263,12 @@ Some custom keybindings.
   (use-package magit)
 #+end_src
 
+* Reformatter
+#+begin_src emacs-lisp
+  (use-package reformatter
+    :straight (:host github
+               :repo "purcell/emacs-reformatter"))
+#+end_src
 * Odin
 Support for the [[https://odin-lang.org/][Odin]] programming language. These are the packages I have found
 that add Odin support to Emacs:
@@ -282,9 +288,23 @@ For the time being, I'm using odin-ts-mode.
 
 #+begin_src emacs-lisp
   (use-package go-ts-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
-  (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode)))
+    :hook (go-ts-mode . go-format-on-save-mode)
+    :config
+    (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+    (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+    (reformatter-define go-format
+  		      :program "goimports"
+  		      :args '("/dev/stdin")))
+  		      
+
+#+end_src
+
+#+begin_src emacs-lisp
+  (add-hook 'go-mode-hook
+  	  (lambda()
+  	    (setq indent-tabs-mode t)
+  	    (setq tab-width 4)
+  	    (setq go-ts-mode-indent-offset 4)))
 #+end_src
 * PHP
 #+begin_src emacs-lisp
