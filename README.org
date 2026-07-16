@@ -285,6 +285,12 @@ For the time being, I'm using odin-ts-mode.
   :mode "\\.odin\\'")
 #+end_src
 * Go
+My configuration for the [[https://go.dev/][Go]] programming language, one of the languages that I use the most these days. To get
+the formatting on save to work, make sure the =goimports= tool is installed.
+
+#+begin_example
+$ go install golang.org/x/tools/cmd/goimports@latest
+#+end_example
 
 #+begin_src emacs-lisp
   (use-package go-ts-mode
