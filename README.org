@@ -289,12 +289,13 @@ For the time being, I'm using odin-ts-mode.
 #+begin_src emacs-lisp
   (use-package go-ts-mode
     :hook (go-ts-mode . go-format-on-save-mode)
-    :config
+    :init
     (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
     (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+    :config
     (reformatter-define go-format
-  		      :program "goimports"
-  		      :args '("/dev/stdin")))
+      :program "goimports"
+      :args '("/dev/stdin")))
   		      
 
 #+end_src
