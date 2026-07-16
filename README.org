@@ -319,6 +319,19 @@ $ go install golang.org/x/tools/cmd/goimports@latest
     :config
     (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode)))
 #+end_src
+* Web-mode
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :mode
+    (("\\.gohtml\\'" . web-mode))
+    :config
+    (setq web-mode-engines-alist
+          '(("go" . "\\.gohtml\\'")))
+    (setq web-mode-markup-indent-offset 2
+          web-mode-css-indent-offset 2
+          web-mode-code-indent-offset 2))
+#+end_src
 * Tree-sitter
 
 Add grammars to tree-sitter.
