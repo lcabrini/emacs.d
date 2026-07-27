@@ -256,6 +256,16 @@ Some custom keybindings.
     :hook (org-mode . org-auto-tangle-mode))
 #+end_src
 
+* Org-refile
+#+begin_src emacs-lisp
+  (setq org-outline-path-complete-in-steps nil
+        org-refile-use-outline-path 'file
+        org-refile-targets '(("~/Appunti/gtd/projects.org" :level . 1)
+                             ("~/Appunti/gtd/tasks.org" :level . 1)
+                             ("~/Appunti/gtd/someday.org" :level . 1)
+                             ("~/Appunti/gtd/freezer.org" :level . 1)
+                             ("~/Appunti/gtd/archive.org" :level . 1)))
+#+end_src
 * Magit
 [[https://magit.vc/][Magit]] is an interface to [[https://git-scm.com/][Git]].
 
@@ -313,11 +323,39 @@ $ go install golang.org/x/tools/cmd/goimports@latest
   	    (setq tab-width 4)
   	    (setq go-ts-mode-indent-offset 4)))
 #+end_src
+
 * PHP
 #+begin_src emacs-lisp
   (use-package php-ts-mode
     :config
     (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode)))
+#+end_src
+* SQL
+#+begin_src emacs-lisp
+  (use-package sql-indent)
+#+end_src
+
+#+begin_src emacs-lisp
+  (add-hook 'sql-mode-hook
+  	  (lambda ()
+  	    (setq indent-tabs-mode nil)
+  	    (sqlind-minor-mode 1)))
+
+  (setq sql-product 'postgres)
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package sqlup-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+  (add-hook 'sql-mode-hook 'sqlup-mode)
+  (add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+
+  (add-to-list 'sqlup-blacklist
+  	     "id"
+  	     "name")
+  	     
 #+end_src
 * Web-mode
 #+begin_src emacs-lisp
