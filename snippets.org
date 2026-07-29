@@ -34,7 +34,7 @@ This is my personal collection of snippets for [[https://github.com/joaotavora/y
   # name: http.Handler method
   # key: _ah
   # --
-  func (app *application) $1(w http.ResponseWriter, r *http.Request) {
+  func (a *app) $1(w http.ResponseWriter, r *http.Request) {
        $0
   }
 #+end_src
@@ -58,7 +58,7 @@ This is my personal collection of snippets for [[https://github.com/joaotavora/y
   # name: Middleware method
   # key: _amw
   # --
-  (app *application) func $1(next http.Handler) http.Handler {
+  (a *app) func $1(next http.Handler) http.Handler {
       return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
           $0
 
